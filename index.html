@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harpio IA</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f3d81e0018.js" crossorigin="anonymous"></script>
+    <style>
+        .nav-link {
+            text-align: left;
+            color: #9d73ff;
+        }
+        .nav-link:hover {
+        color: #5009B0; /* Preto */
+        }
+        .nav-pills .nav-link.active {
+        color: #ffffff; /* Branco */
+        background-color: #5009B0; /* Azul */
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #546b83;
+            padding: 10px;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .user-message {
+            background-color: #e9ecef;
+            text-align: right;
+        }
+        .ai-message {
+            background-color: #f0f0f0;
+            text-align: left;
+        }
+        .form-group label {
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            margin-bottom: 15px;
+        }
+        .config-column {
+            padding-left: 20px; /* Adiciona um espaçamento para a coluna de configuração */
+        }
+        .log-code {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        /* Estilo para o alert lilás */
+        .alert-lilas {
+            background-color: #F0F8FF; /* Lilás mais claro */
+            border-color: #F0F8FF;
+            padding-left: 12px; /* Margem lateral de 24px (16px padding + 8px borda) */
+        }
+        .alert-lilas::before {
+            content: '';
+        }
+    </style>
+</head>
+<body>
+    <div class="container mb-5">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img src="https://d1eni3461m2dqk.cloudfront.net/wp-content/uploads/2024/01/Extenso-1.png" width="20%">
+            <span class="fs-6"><strong> .IA </strong></span>
+            </a>
+        </header>
+        <div class="col-md-12 config-column">
+            <div style="margin-left: -24px;" class="d-flex align-items-start">
+                <div class="col-md-2 nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <button class="nav-link active" id="v-pills-Home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fa-solid fa-house-laptop mr-2"></i>Home</button>
+                    <button class="nav-link" id="v-pills-Gemini_API-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Gemini_API" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class="fa-solid fa-brain mr-2"></i>Gemini API</button>
+                    <button class="nav-link" id="v-pills-Settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Settings" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="fa-solid fa-screwdriver-wrench mr-2"></i>Settings</button>
+                    <button class="nav-link" id="v-pills-Up-loads-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Up-loads" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fa-solid fa-cloud-arrow-up mr-2"></i>Up-loads</button>
+                    <button class="nav-link" id="v-pills-ATS_Data-tab" data-bs-toggle="pill" data-bs-target="#v-pills-ATS_Data" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fa-solid fa-database mr-2"></i>ATS Data</button>
+                    <button class="nav-link" id="v-pills-Technical_Opinion-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Technical_Opinion" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fa-solid fa-certificate mr-2"></i>Technical Opinion</button>
+                    <button class="nav-link" id="v-pills-Behavioral_Opinion-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Behavioral_Opinion" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fa-solid fa-rocket mr-2"></i>Behavioral Opinion</button>
+                    <button class="nav-link" id="v-pills-Free_Talk-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Free_Talk" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fa-solid fa-comments mr-2"></i>Free Talk</button>
+                    <button class="nav-link" id="v-pills-Searchs-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Search" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fa-solid fa-search mr-2"></i>Search</button>
+                    <button class="nav-link" id="v-pills-Example_Files-tab" data-bs-toggle="pill" data-bs-target="#v-pills-Example_Files" type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false"><i class="fa-solid fa-file-lines mr-2"></i>Example Files</button>
+                </div>
+                <div class="col-md-10 tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-Home" role="tabpanel" aria-labelledby="v-pills-Home-tab" tabindex="0">
+                        <h5 class="text-left mb-4"><i class="fa-solid fa-house-laptop mr-2"></i>Home</h5>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-Gemini_API" role="tabpanel" aria-labelledby="v-pills-Gemini_API-tab" tabindex="0">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="text-left mb-4"><i class="fa-solid fa-brain mr-2"></i>API Gemini</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <h6 for="api-key" class="form-label">Insira sua API do Gemini:</h6>
+                                    <input type="text" class="mb-1 form-control" id="api-key" placeholder="Sua API do Gemini">
+                                    <button class="btn btn-secondary mb-1" id="validate-api-key">Validar API KEY</button>
+                                    <small class="text-muted"> Precisamos da sua API para conectar à plataforma Gemini e gerar respostas inteligentes.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-Example_Files" role="tabpanel" aria-labelledby="v-pills-Example_Files-tab" tabindex="0">
+                        <h5 class="text-left mb-4"><i class="fa-solid fa-file-lines mr-2"></i>Example Files</h5>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-Settings" role="tabpanel" aria-labelledby="v-pills-Settings-tab" tabindex="0">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5 class="text-left"><i class="fa-solid fa-screwdriver-wrench mr-1 mb-4"></i>Settings</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="model-select">Escolha o modelo Gemini:</label>
+                                    <select class="form-control" id="model-select">
+                                        <option value=""></option>
+                                        <option value="gemini-1.5-flash">gemini-1.5-flash</option>
+                                        <option value="chat-bison-001">chat-bison-001</option>
+                                        <option value="text-bison-001">text-bison-001</option>
+                                        <option value="embedding-gecko-001">embedding-gecko-001</option>
+                                        <option value="gemini-1.0-pro-latest">gemini-1.0-pro-latest</option>
+                                        <option value="gemini-1.0-pro">gemini-1.0-pro</option>
+                                        <option value="gemini-pro">gemini-pro</option>
+                                        <option value="gemini-1.0-pro-001">gemini-1.0-pro-001</option>
+                                        <option value="gemini-1.0-pro-vision-latest">gemini-1.0-pro-vision-latest</option>
+                                        <option value="gemini-pro-vision">gemini-pro-vision</option>
+                                        <option value="gemini-1.5-pro-latest">gemini-1.5-pro-latest</option>
+                                        <option value="gemini-1.5-pro-001">gemini-1.5-pro-001</option>
+                                        <option value="gemini-1.5-pro">gemini-1.5-pro</option>
+                                        <option value="gemini-1.5-pro-exp-0801">gemini-1.5-pro-exp-0801</option>
+                                        <option value="gemini-1.5-pro-exp-0827">gemini-1.5-pro-exp-0827</option>
+                                        <option value="gemini-1.5-flash-latest">gemini-1.5-flash-latest</option>
+                                        <option value="gemini-1.5-flash-001">gemini-1.5-flash-001</option>
+                                        <option value="gemini-1.5-flash-001-tuning">gemini-1.5-flash-001-tuning</option>
+                                        <option value="gemini-1.5-flash-exp-0827">gemini-1.5-flash-exp-0827</option>
+                                        <option value="gemini-1.5-flash-8b-exp-0827">gemini-1.5-flash-8b-exp-0827</option>
+                                        <option value="embedding-001">embedding-001</option>
+                                        <option value="text-embedding-004">text-embedding-004</option>
+                                        <option value="aqa">aqa</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="system-instructions">System Instructions:</label>
+                                    <textarea class="form-control" id="system-instructions" rows="2" placeholder="Digite as instruções para o Gemini..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <div class="slider-label-container">
+                                        <label for="temperature-slider">Temperatura:</label>
+                                        <span class="bold" id="temperature-value">1</span>
+                                    </div>
+                                    <input type="range" class="form-range" min="0" max="2" step="0.1" id="temperature-slider" value="1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="output-length">Output Length (Tokens):</label>
+                                    <input type="number" class="form-control" id="output-length" min="1" value="8192">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="harassment-select">Assédio:</label>
+                                    <select class="form-control" id="harassment-select">
+                                        <option value="block">Bloquear</option>
+                                        <option value="warn">Alertar</option>
+                                        <option value="allow">Permitir</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <label for="hate-select">Ódio:</label>
+                                    <select class="form-control" id="hate-select">
+                                        <option value="block">Bloquear</option>
+                                        <option value="warn">Alertar</option>
+                                        <option value="allow">Permitir</option>
+                                    </select>
+                                </div>
+                                <hr>
+                                <div class="form-group mb-3 mt-3">
+                                    <label for="sexually-explicit-select">Sexualmente Explícito:</label>
+                                    <select class="form-control" id="sexually-explicit-select">
+                                        <option value="block">Bloquear</option>
+                                        <option value="warn">Alertar</option>
+                                        <option value="allow">Permitir</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="dangerous-content-select">Conteúdo Perigoso:</label>
+                                    <select class="form-control" id="dangerous-content-select">
+                                        <option value="block">Bloquear</option>
+                                        <option value="warn">Alertar</option>
+                                        <option value="allow">Permitir</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-Up-loads" role="tabpanel" aria-labelledby="v-pills-Up-loads-tab" tabindex="0">
+                        <div class="row">
+                            <h5 class="text-left mb-4"><i class="fa-solid fa-cloud-arrow-up mr-2"></i>Up-loads</h5>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="file-input">Transcrição da Entrevista (.txt):</label>
+                                    <input type="file" class="form-control" id="file-input" accept=".txt">
+                                    <span hidden id="file-name"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="archetype-input">Arquétipo (.txt):</label>
+                                    <input type="file" class="form-control" id="archetype-input" accept=".txt">
+                                    <span hidden id="archetype-file-name"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="disc-input">DISC (.txt):</label>
+                                    <input type="file" class="form-control" id="disc-input" accept=".txt">
+                                    <span hidden id="disc-file-name"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label for="linkedin-input">Resumo LinkedIn (.txt):</label>
+                                    <input type="file" class="form-control" id="linkedin-input" accept=".txt">
+                                    <span hidden id="linkedin-file-name"></span>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="job-description-input">Job Description (.txt):</label>
+                                    <input type="file" class="form-control" id="job-description-input" accept=".txt">
+                                    <span hidden id="job-description-file-name"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-ATS_Data" role="tabpanel" aria-labelledby="v-pills-ATS_Data-tab" tabindex="0">
+                        <h5 class="text-left mb-4"><i class="fa-solid fa-database mr-2"></i>ATS data</h5>
+                        <button class="btn btn-primary mb-3" id="generate-ats-button" type="button">Gerar</button>
+                        <div class="mt-3" id="ats-response"></div> 
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-Technical_Opinion" role="tabpanel" aria-labelledby="v-pills-Technical_Opinion-tab" tabindex="0">
+                        <h5 class="text-left mb-4"><i class="fa-solid fa-certificate mr-1"></i>Technical Opinion</h5>
+                        <button class="btn btn-primary mb-3" id="generate-technical-opinion-button" type="button">Gerar</button>
+                        <div class="mt-3" id="technical-opinion-response"></div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-Behavioral_Opinion" role="tabpanel" aria-labelledby="v-pills-Behavioral_Opinion-tab" tabindex="0">
+                        <h5 class="text-left mb-4"><i class="fa-solid fa-rocket mr-2"></i>Behavioral Opinion</h5>
+                        <button class="btn btn-primary mb-3" id="generate-behavioral-opinion-button" type="button">Gerar</button>
+                        <div class="mt-3" id="behavioral-opinion-response"></div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-Free_Talk" role="tabpanel" aria-labelledby="v-pills-Free_Talk-tab" tabindex="0">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5 class="text-left mb-4"><i class="fa-solid fa-comments mr-2"></i>Free Talk</h5>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="chat-container" id="chat-box">
+                                    <!-- Mensagens do chat serão inseridas aqui -->
+                                </div>
+                                <div class="form-group">
+                                    <textarea type="text" class="mt-1 form-control" id="message" rows="3" placeholder="Digite sua pergunta..."></textarea>
+                                </div>
+                                <button style="margin-top: -12px;" class="btn btn-primary btn-block" id="send-button" type="button">Enviar</button>
+                            </div>
+                            <div class="col-md-4">
+                                <!-- Início do Componente Sanfona -->
+                                <div class="accordion mb-3 mt-1" id="accordionExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                Detalhes da Consulta
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="m-4" id="response-time-alert"></div> <!-- Div para o alert (acima do accordionExample) -->
+                                            <div class="ml-3 bi bi-coin mr-2" id="cost-estimate"></div> <!-- Exibe a estimativa de custo -->
+                                            <div style="margin-top: -24px;" class="accordion-body" id="log-code-container">
+                                                <!-- O código da consulta será exibido aqui -->
+                                            </div>
+                                            <div id="response-time"></div> <!-- Exibe o tempo de resposta -->
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingTwo">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                Histórico
+                                            </button>
+                                        </h2>
+                                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body" id="conversation-history">
+                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-Search" role="tabpanel" aria-labelledby="v-pills-Searchs-tab" tabindex="0">
+                        <h5 class="text-left mb-4"><i class="fa-solid fa-search mr-2"></i>Search</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script type="importmap">
+        {
+            "imports": {
+                "@google/generative-ai": "https://esm.run/@google/generative-ai"
+            }
+        }
+    </script>
+
+    <script type="module">
+        //const API_KEY = "AIzaSyD_SinHN4Yrc7pNFnKuoJgQHsCecNOz9Ms"; // Substitua pela sua chave API do Gemini
+        import { GoogleGenerativeAI } from 'https://esm.run/@google/generative-ai';
+        let genAI; // Declara a variável genAI globalmente
+        const chatBox = document.getElementById('chat-box');
+        const messageInput = document.getElementById('message');
+        const sendButton = document.getElementById('send-button');
+        const fileInput = document.getElementById('file-input');
+        const archetypeInput = document.getElementById('archetype-input');
+        const discInput = document.getElementById('disc-input');
+        const linkedinInput = document.getElementById('linkedin-input'); // Adiciona o input de Resumo LinkedIn
+        const jobDescriptionInput = document.getElementById('job-description-input'); // Adiciona o input de Job Description
+        const modelSelect = document.getElementById('model-select');
+        const systemInstructionsInput = document.getElementById('system-instructions');
+        const temperatureSlider = document.getElementById('temperature-slider');
+        const temperatureValue = document.getElementById('temperature-value');
+        const fileNameSpan = document.getElementById('file-name');
+        const archetypeFileNameSpan = document.getElementById('archetype-file-name');
+        const discFileNameSpan = document.getElementById('disc-file-name');
+        const linkedinFileNameSpan = document.getElementById('linkedin-file-name'); // Adiciona o span para o Resumo LinkedIn
+        const jobDescriptionFileNameSpan = document.getElementById('job-description-file-name'); // Adiciona o span para Job Description
+        const logCodeContainer = document.getElementById('log-code-container');
+        const responseTimeAlertDiv = document.getElementById('response-time-alert');
+        const harassmentSelect = document.getElementById('harassment-select');
+        const hateSelect = document.getElementById('hate-select');
+        const sexuallyExplicitSelect = document.getElementById('sexually-explicit-select');
+        const dangerousContentSelect = document.getElementById('dangerous-content-select');
+        const outputLengthInput = document.getElementById('output-length'); // Adiciona a variável para o input de Output Length
+        const costEstimateDiv = document.getElementById('cost-estimate'); // Adiciona a variável para o div de estimativa de custo
+        const apiKeyInput = document.getElementById('api-key'); // Adiciona a variável para o input da API Key
+
+        const calcularBtn = document.getElementById('calcular');
+        const modeloSelect = document.getElementById('modelo');
+        const caracteresEntradaInput = document.getElementById('caracteresEntrada');
+        const caracteresSaidaInput = document.getElementById('caracteresSaida');
+        const custoTotalInput = document.getElementById('custoTotal');
+        const custoEntradaInput = document.getElementById('custoEntrada');
+        const custoSaidaInput = document.getElementById('custoSaida');
+
+        let arquivoConteudo = "";
+        let arquetipoConteudo = "";
+        let discConteudo = "";
+        let linkedinConteudo = ""; // Adiciona a variável para o conteúdo do Resumo LinkedIn
+        let jobDescriptionConteudo = ""; // Adiciona a variável para o conteúdo de Job Description
+        let conversaHistorico = [];
+
+        let modeloAtual = 'gemini-1.5-flash'; // Modelo inicial (defina como preferir)
+        let modelo; // Variável global para o modelo
+
+        let totalTokens = 0; // Variável para armazenar o total de tokens utilizados
+        let totalCaracteresEntrada = 0;
+        let totalCaracteresSaida = 0;
+        let totalCaracteres = 0;
+        let valorTotalEstimado = 0;
+        let ultimoPrompt = ""; // Variável para armazenar o último prompt
+
+        function addMessage(message, role) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message', role === 'user' ? 'user-message' : 'ai-message');
+
+            // 1. Títulos
+            message = message.replace(/^(#+)\s+(.+)$/gm, '<h$1>$2</h$1>'); // H1 a H6
+
+            // 2. Negrito
+            message = message.replace(/\*\*([^*]+)\*\*/gm, '<b>$1</b>');
+            message = message.replace(/__([^_]+)__/gm, '<b>$1</b>');
+
+            // 3. Itálico
+            message = message.replace(/\*([^*]+)\*/gm, '<i>$1</i>');
+            message = message.replace(/_([^_]+)_/gm, '<i>$1</i>');
+
+            // 4. Monospace
+            message = message.replace(/`([^`]+)`/gm, '<code>$1</code>');
+
+            // 5. Strikethrough
+            message = message.replace(/~~([^~]+)~~/gm, '<s>$1</s>');
+
+            // 6. Links
+            message = message.replace(/\[([^\]]+)\]\(([^)]+)\)/gm, '<a href="$2">$1</a>');
+
+            // 7. Imagem
+            message = message.replace(/!\[([^\]]+)\]\(([^)]+)\)/gm, '<img src="$2" alt="$1">');
+
+            // 8. Régua horizontal
+            message = message.replace(/---/gm, '<hr />');
+
+            // 9. Listas ordenadas
+            message = message.replace(/^\s*(\d+)\.\s+(.+)$/gm, '<ol><li>$1. $2</li>');
+            message = message.replace(/^(\d+)\.\s+/gm, '<ol><li>$1.</li>');
+            message = message.replace(/\s+(\d+)\.\s+/gm, '<li>$1.</li>');
+            message = message.replace(/(\d+)\.\s*$/gm, '</li></ol>');
+
+            // 10. Listas não ordenadas
+            message = message.replace(/^\s*\*\s+(.+)$/gm, '<ul><li>$1</li>');
+            message = message.replace(/^\s*\+\s+(.+)$/gm, '<ul><li>$1</li>');
+            message = message.replace(/^\s*\-\s+(.+)$/gm, '<ul><li>$1</li>');
+            message = message.replace(/\*\s*/gm, '</li>');
+            message = message.replace(/\+\s*/gm, '</li>');
+            message = message.replace(/\-\s*/gm, '</li>');
+            message = message.replace(/\*\s*$/gm, '</li></ul>');
+            message = message.replace(/\+\s*$/gm, '</li></ul>');
+            message = message.replace(/\-\s*$/gm, '</li></ul>');
+
+            // 11. Tabela
+            message = message.replace(/\|(.+)\|/gm, '<tr><td>$1</td></tr>');
+            message = message.replace(/\|(.+)\|(.+)\|(.+)\|/gm, '<tr><td>$1</td><td>$2</td><td>$3</td></tr>');
+            message = message.replace(/^\s*\|(.+)\|\s*$/gm, '<th>$1</th>');
+
+            // 12. Bloco de texto pré-formatado
+            message = message.replace(/```\n(.+?)\n```/gms, '<pre>\n$1\n</pre>');
+
+            // 13. Citação em bloco
+            message = message.replace(/^>\s+(.+)$/gm, '<blockquote>$1</blockquote>');
+            message = message.replace(/^>\s*$/gm, '</blockquote>');
+
+            // 14. Quebra de linha
+            message = message.replace(/  \s*$/gm, '<br>'); // Substitui dois espaços no final da linha por <br>
+
+            // 15. Adiciona espaçamento após ponto final
+            message = message.replace(/\. /g, '.  <br>');
+
+            // 16. Ajusta as tags HTML
+            message = message.replace(/<li><li>/gm, '<li>');
+            message = message.replace(/<li><\/li><li>/gm, '<li>');
+            message = message.replace(/<\/li><li>/gm, '<li>');
+            message = message.replace(/<li><\/li>/gm, '<li>');
+            message = message.replace(/<\/li><li><\/li>/gm, '<li>');
+
+            // 17. Ajusta a quebra de linha
+            message = message.replace(/<br>/g, '<br><br>');
+            message = message.replace(/<br><br><br>/g, '<br><br>');
+            message = message.replace(/<br><br>/g, '<br><br>');
+
+            messageDiv.innerHTML = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function readFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (event) => resolve(event.target.result);
+                reader.onerror = (error) => reject(error);
+                reader.readAsText(file);
+            });
+        }
+
+        function updateLog() {
+            const systemInstructions = systemInstructionsInput.value.trim();
+            const temperatura = parseFloat(temperatureSlider.value);
+            const harassment = harassmentSelect.value;
+            const hate = hateSelect.value;
+            const sexuallyExplicit = sexuallyExplicitSelect.value;
+            const dangerousContent = dangerousContentSelect.value;
+            const outputLength = parseInt(outputLengthInput.value); // Obtem o valor do Output Length
+
+            // Gera o código da consulta
+            let codigoConsulta = `modelo: ${modeloAtual}\n`;
+            codigoConsulta += `temperatura: ${temperatura}\n`;
+            codigoConsulta += `system_instructions: ${systemInstructions}\n`;
+            codigoConsulta += `transcrição: ${fileInput.files[0]?.name || ''}\n`;
+            codigoConsulta += `arquetipo: ${archetypeInput.files[0]?.name || ''}\n`;
+            codigoConsulta += `disc: ${discInput.files[0]?.name || ''}\n`;
+            codigoConsulta += `linkedin: ${linkedinInput.files[0]?.name || ''}\n`; // Adiciona o nome do arquivo de Resumo LinkedIn
+            codigoConsulta += `job_description: ${jobDescriptionInput.files[0]?.name || ''}\n`; // Adiciona o nome do arquivo de Job Description
+            codigoConsulta += `harassment: ${harassment}\n`;
+            codigoConsulta += `hate: ${hate}\n`;
+            codigoConsulta += `sexually_explicit: ${sexuallyExplicit}\n`;
+            codigoConsulta += `dangerous_content: ${dangerousContent}\n`;
+            codigoConsulta += `output_length: ${outputLength}\n`; // Adiciona o output length ao log
+            codigoConsulta += `total_caracteres_entrada: ${totalCaracteresEntrada}\n`;
+            codigoConsulta += `total_caracteres_saida: ${totalCaracteresSaida}\n`;
+
+            // Exibe o código da consulta no front-end
+            logCodeContainer.innerHTML = `<pre class="log-code">${codigoConsulta}</pre>`;
+        }
+
+
+        // Função para atualizar o modelo e API key
+        function atualizarGemini() {
+            const apiKey = apiKeyInput.value.trim();
+            if (apiKey) {
+                genAI = new GoogleGenerativeAI(apiKey);
+                modeloAtual = modelSelect.value;
+                modelo = genAI.getGenerativeModel({ model: modeloAtual });
+                addMessage(`API Key atualizada para: ${apiKey}`, 'ai-message');
+                addMessage(`Modelo Gemini alterado para: ${modeloAtual}`, 'ai-message');
+            } else {
+                addMessage('Por favor, insira uma API Key válida.', 'ai-message');
+            }
+        }
+
+        async function sendMessage(message) {
+            addMessage(message, 'user');
+            conversaHistorico.push({ role: 'user', content: message });
+            messageInput.value = '';
+            totalCaracteresEntrada += message.length; // Adiciona os caracteres da pergunta
+            totalCaracteres += message.length;
+            totalTokens += message.length;
+
+            try {
+                sendButton.disabled = true;
+                sendButton.innerHTML = `
+                    <span class="spinner-border spinner-border-sm" role="status" aria-   hidden="true"></span>
+                    Carregando...
+                `;
+
+                // Pega o prompt do input messageInput
+                let prompt = messageInput.value.trim();
+
+                const systemInstructions = systemInstructionsInput.value.trim();
+                const temperatura = parseFloat(temperatureSlider.value);
+                const harassment = harassmentSelect.value;
+                const hate = hateSelect.value;
+                const sexuallyExplicit = sexuallyExplicitSelect.value;
+                const dangerousContent = dangerousContentSelect.value;
+                const outputLength = parseInt(outputLengthInput.value); // Obtem o valor do Output Length
+
+                // Gera o código da consulta
+                let codigoConsulta = `modelo: ${modeloAtual}\n`;
+                codigoConsulta += `temperatura: ${temperatura}\n`;
+                codigoConsulta += `system_instructions: ${systemInstructions}\n`;
+                codigoConsulta += `transcrição: ${fileInput.files[0]?.name || ''}\n`;
+                codigoConsulta += `arquetipo: ${archetypeInput.files[0]?.name || ''}\n`;
+                codigoConsulta += `disc: ${discInput.files[0]?.name || ''}\n`;
+                codigoConsulta += `linkedin: ${linkedinInput.files[0]?.name || ''}\n`; // Adiciona o nome do arquivo de Resumo LinkedIn
+                codigoConsulta += `job_description: ${jobDescriptionInput.files[0]?.name || ''}\n`; // Adiciona o nome do arquivo de Job Description
+                codigoConsulta += `harassment: ${harassment}\n`;
+                codigoConsulta += `hate: ${hate}\n`;
+                codigoConsulta += `sexually_explicit: ${sexuallyExplicit}\n`;
+                codigoConsulta += `dangerous_content: ${dangerousContent}\n`;
+                codigoConsulta += `output_length: ${outputLength}\n`; // Adiciona o output length à consulta
+                codigoConsulta += `total_caracteres_entrada: ${totalCaracteresEntrada}\n`;
+                codigoConsulta += `total_caracteres_saida: ${totalCaracteresSaida}\n`;
+
+                // Exibe o código da consulta no front-end
+                logCodeContainer.innerHTML = `<pre class="log-code">${codigoConsulta}</pre>`;
+
+                const startTime = performance.now();
+
+                // Adiciona os caracteres dos arquivos de contexto à contagem
+                totalCaracteresEntrada += arquivoConteudo.length + arquetipoConteudo.length + discConteudo.length + linkedinConteudo.length + jobDescriptionConteudo.length; 
+                totalCaracteres += arquivoConteudo.length + arquetipoConteudo.length + discConteudo.length + linkedinConteudo.length + jobDescriptionConteudo.length;
+
+                if (arquivoConteudo || arquetipoConteudo || discConteudo || linkedinConteudo || jobDescriptionConteudo) {
+                    prompt = `O texto a seguir é um fragmento de um arquivo:\n\n`;
+                    if (arquivoConteudo) {
+                        prompt += `**Transcrição:**\n${arquivoConteudo}\n\n`;
+                    }
+                    if (arquetipoConteudo) {
+                        prompt += `**Arquétipo:**\n${arquetipoConteudo}\n\n`;
+                    }
+                    if (discConteudo) {
+                        prompt += `**DISC:**\n${discConteudo}\n\n`;
+                    }
+                    if (linkedinConteudo) {
+                        prompt += `**Resumo LinkedIn:**\n${linkedinConteudo}\n\n`;
+                    }
+                    if (jobDescriptionConteudo) {
+                        prompt += `**Job Description:**\n${jobDescriptionConteudo}\n\n`;
+                    }
+                    prompt += `${conversaHistorico.map(item => `**${item.role}:** ${item.content}`).join('\n\n')}\n\n${systemInstructions ? `System Instructions: ${systemInstructions}\n\n` : '' }Por favor, responda a minha próxima pergunta sobre este texto.`;
+                } else {
+                    prompt = `${conversaHistorico.map(item => `**${item.role}:** ${item.content}`).join('\n\n')}\n\n${systemInstructions ? `System Instructions: ${systemInstructions}\n\n` : '' }`;
+                }
+
+                const response = await modelo.generateContent(prompt, {
+                    temperature: temperatura,
+                    safetySettings: {
+                        harassment: harassment,
+                        hate: hate,
+                        sexuallyExplicit: sexuallyExplicit,
+                        dangerousContent: dangerousContent
+                    },
+                    maxOutputTokens: outputLength // Adiciona o output length à configuração
+                });
+
+                if (response.response && response.response.candidates && response.response.candidates.length > 0) {
+                    const text = response.response.candidates[0].content.parts[0].text;
+                    addMessage(text, 'ai-message');
+                    conversaHistorico.push({ role: 'ai', content: text });
+                    totalCaracteresSaida += text.length; // Adiciona os tokens da resposta
+                    totalCaracteres += text.length;
+                    totalTokens += text.length;
+
+                    // Atualiza o log com os caracteres de entrada e saída após receber a resposta
+                    updateLog(); // Aqui está a atualização do log!
+
+                    // Calcula o custo da conversa em tokens e dólares
+                    const custoTokenIn = (totalCaracteresEntrada / 2) * (0.00001875/1000); // Custo por token em dólares (valor hipotético)
+                    const custoTokenOut = totalCaracteresSaida * (0.000075/1000); // Custo por token em dólares (valor hipotético)
+                    const custoTotal = custoTokenIn + custoTokenOut;
+                    costEstimateDiv.innerHTML = `<div class="ml-2 mr-2"><i class=" fa-solid fa-money-bill-trend-up mr-2"></i><strong>Estimativa de Custo: </strong>US$ ${custoTotal.toFixed(4)}</div>`; // Exibe a estimativa de custo
+                } else {
+                    addMessage('Ocorreu um erro na comunicação com o Gemini. Por favor, tente novamente.', 'ai-message');
+                }
+
+                const endTime = performance.now();
+                const responseTime = (endTime - startTime) / 1000;
+
+                // Cria o alert com o tempo de resposta
+                responseTimeAlertDiv.innerHTML = `
+                    <div class="alert alert-lilas alert-dismissible fade show" role="alert">
+                        <strong><i class="fa-solid fa-business-time mr-2"></i>Resposta:</strong> ${responseTime.toFixed(2)} segundos
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                `;
+
+                sendButton.disabled = false;
+                sendButton.innerHTML = "Enviar";
+            } catch (error) {
+                addMessage('Ocorreu um erro na comunicação com o Gemini. Por favor, tente novamente.', 'ai-message');
+
+                sendButton.disabled = false;
+                sendButton.innerHTML = "Enviar";
+            }
+        }
+
+        sendButton.addEventListener('click', () => {
+            const message = messageInput.value.trim();
+            if (message) {
+                sendMessage(message);
+            } else if (arquivoConteudo || arquetipoConteudo || discConteudo || linkedinConteudo || jobDescriptionConteudo) {
+                const prompt = `O texto a seguir é um fragmento de um arquivo:\n\n`;
+                if (arquivoConteudo) {
+                    prompt += `**Transcrição:**\n${arquivoConteudo}\n\n`;
+                }
+                if (arquetipoConteudo) {
+                    prompt += `**Arquétipo:**\n${arquetipoConteudo}\n\n`;
+                }
+                if (discConteudo) {
+                    prompt += `**DISC:**\n${discConteudo}\n\n`;
+                }
+                if (linkedinConteudo) {
+                    prompt += `**Resumo LinkedIn:**\n${linkedinConteudo}\n\n`;
+                }
+                if (jobDescriptionConteudo) {
+                    prompt += `**Job Description:**\n${jobDescriptionConteudo}\n\n`;
+                }
+                prompt += `Por favor, responda a minha próxima pergunta sobre este texto.`;
+                sendMessage(prompt);
+            } else {
+                addMessage("Por favor, carregue um arquivo ou digite uma pergunta.", 'ai-message');
+            }
+        });
+
+        modelSelect.addEventListener('change', () => {
+            modeloAtual = modelSelect.value;
+            modelo = genAI.getGenerativeModel({ model: modeloAtual });
+            // Atualiza o log em tempo real
+            updateLog();
+            addMessage(`Modelo Gemini alterado para: ${modeloAtual}`, 'ai-message');
+        });
+
+        temperatureSlider.addEventListener('input', () => {
+            temperatureValue.textContent = temperatureSlider.value;
+            // Atualiza o log em tempo real
+            updateLog();
+            addMessage(`Temperatura alterada para: ${temperatureSlider.value}`, 'ai-message');
+        });
+
+        systemInstructionsInput.addEventListener('input', () => {
+            // Atualiza o log em tempo real
+            updateLog();
+        });
+
+        fileInput.addEventListener('change', async () => {
+            const file = fileInput.files[0];
+            if (file) {
+                fileNameSpan.textContent = `(${file.name})`;
+                arquivoConteudo = await readFile(file);
+                addMessage("O arquivo de Transcrição foi carregado!", 'ai-message');
+                updateLog(); // Atualizar o log em tempo real
+            } else {
+                fileNameSpan.textContent = '';
+            }
+        });
+
+        archetypeInput.addEventListener('change', async () => {
+            const archetypeFile = archetypeInput.files[0];
+            if (archetypeFile) {
+                archetypeFileNameSpan.textContent = `(${archetypeFile.name})`;
+                arquetipoConteudo = await readFile(archetypeFile);
+                addMessage("O arquivo de Arquétipo foi carregado!", 'ai-message');
+                updateLog(); // Atualiza o log em tempo real
+            } else {
+                archetypeFileNameSpan.textContent = '';
+            }
+        });
+
+        discInput.addEventListener('change', async () => {
+            const discFile = discInput.files[0];
+            if (discFile) {
+                discFileNameSpan.textContent = `(${discFile.name})`;
+                discConteudo = await readFile(discFile);
+                addMessage("O arquivo DISC foi carregado!", 'ai-message');
+                updateLog();
+            } else {
+                discFileNameSpan.textContent = '';
+            }
+        });
+
+        linkedinInput.addEventListener('change', async () => { // Adiciona o listener para o input de Resumo LinkedIn
+            const linkedinFile = linkedinInput.files[0];
+            if (linkedinFile) {
+                linkedinConteudo = await readFile(linkedinFile); // Lê o conteúdo do arquivo
+                addMessage("O arquivo de Resumo LinkedIn foi carregado!", 'ai-message');
+                updateLog(); // Atualiza o log em tempo real
+            } else {
+                linkedinFileNameSpan.textContent = ''; // Limpa o span se nenhum arquivo for selecionado
+            }
+        });
+
+        jobDescriptionInput.addEventListener('change', async () => { // Adiciona o listener para o input de Job Description
+            const jobDescriptionFile = jobDescriptionInput.files[0];
+            if (jobDescriptionFile) {
+                jobDescriptionConteudo = await readFile(jobDescriptionFile); // Lê o conteúdo do arquivo
+                addMessage("O arquivo de Job Description foi carregado!", 'ai-message');
+                updateLog(); // Atualiza o log em tempo real
+            } else {
+                jobDescriptionFileNameSpan.textContent = ''; // Limpa o span se nenhum arquivo for selecionado
+            }
+        });
+
+        harassmentSelect.addEventListener('change', () => {
+            updateLog();
+            addMessage(`Harassment alterado para: ${harassmentSelect.value}`, 'ai-message');
+        });
+        hateSelect.addEventListener('change', () => {
+            updateLog();
+            addMessage(`Hate alterado para: ${hateSelect.value}`, 'ai-message');
+        });
+        sexuallyExplicitSelect.addEventListener('change', () => {
+            updateLog();
+            addMessage(`Sexually Explicit alterado para: ${sexuallyExplicitSelect.value}`, 'ai-message');
+        });
+        dangerousContentSelect.addEventListener('change', () => {
+            updateLog();
+            addMessage(`Dangerous Content alterado para: ${dangerousContentSelect.value}`, 'ai-message');
+        });
+
+        // Nova função para exibir o histórico da conversa
+        function updateConversationHistory() {
+            const conversationHistoryDiv = document.getElementById('conversation-history');
+            conversationHistoryDiv.innerHTML = ''; // Limpa o histórico antes de atualizar
+
+            if (conversaHistorico.length > 0) {
+                conversaHistorico.forEach(item => {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.classList.add('chat-message', item.role === 'user' ? 'user-message' : 'ai-message');
+                    messageDiv.innerHTML = `**${item.role}:** ${item.content}`;
+                    conversationHistoryDiv.appendChild(messageDiv);
+                });
+            } else {
+                conversationHistoryDiv.innerHTML = '<p>Sem histórico de conversa.</p>';
+            }
+        }
+
+        // Chama a função para atualizar o histórico sempre que uma mensagem é enviada
+        sendButton.addEventListener('click', () => {
+            updateConversationHistory();
+            const conversationHistoryDiv = document.getElementById('conversation-history');
+            const message = messageInput.value.trim();
+            if (message) {
+                sendMessage(message);
+            } else if (arquivoConteudo || arquetipoConteudo || discConteudo || linkedinConteudo || jobDescriptionConteudo) {
+                const prompt = `O texto a seguir é um fragmento de um arquivo:\n\n`;
+                if (arquivoConteudo) {
+                    prompt += `**Transcrição:**\n${arquivoConteudo}\n\n`;
+                }
+                if (arquetipoConteudo) {
+                    prompt += `**Arquétipo:**\n${arquetipoConteudo}\n\n`;
+                }
+                if (discConteudo) {
+                    prompt += `**DISC:**\n${discConteudo}\n\n`;
+                }
+                if (linkedinConteudo) {
+                    prompt += `**Resumo LinkedIn:**\n${linkedinConteudo}\n\n`;
+                }
+                if (jobDescriptionConteudo) {
+                    prompt += `**Job Description:**\n${jobDescriptionConteudo}\n\n`;
+                }
+                prompt += `Por favor, responda a minha próxima pergunta sobre este texto.`;
+                sendMessage(prompt);
+            } else {
+                addMessage("Por favor, carregue um arquivo ou digite uma pergunta.", 'ai-message');
+            }
+
+            // Atualiza o histórico da conversa
+            updateConversationHistory();
+        });
+
+
+        // Adiciona o listener para o input de API Key
+        apiKeyInput.addEventListener('input', () => {
+            atualizarGemini();
+        });
+
+        async function generateAtsResponse() {
+            const atsResponseDiv = document.getElementById('ats-response');
+            atsResponseDiv.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Carregando...';
+
+            // Prompt pré-definido para a aba "ATS Data"
+            const prompt = `O texto a seguir é um fragmento de um arquivo:\n\n` +
+                (arquivoConteudo ? `**Transcrição:**\n${arquivoConteudo}\n\n` : '') +
+                (arquetipoConteudo ? `**Arquétipo:**\n${arquetipoConteudo}\n\n` : '') +
+                (discConteudo ? `**DISC:**\n${discConteudo}\n\n` : '') +
+                (linkedinConteudo ? `**Resumo LinkedIn:**\n${linkedinConteudo}\n\n` : '') +
+                (jobDescriptionConteudo ? `**Job Description:**\n${jobDescriptionConteudo}\n\n` : '') +
+                `Procure em todos os arquivos utilizados para fragmentos e contexto dessa conversa as respostas paras as perguntas dessa, todas as respostas contidas na primeira coluna devem ser respondidas nasegunda coluna de acordo com oes documentos inseridos como contexto nesa conversa e deve ser resopondida no mesmo formato de tabela html onde é obrigatórioa a substituição do termo "**[Insira a resposta aqui]**" pela resposta adequada de acordo com a pergunta de cada campo use todos os arquivos inseridos para contexto e insira um <br><br> a cada grupo de pergunta e resposta.
+<table>
+  <thead>
+    <tr>
+      <th>Perguntas</th>
+      <th>Respostas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Atualmente Empregado?</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Considera uma mudança de área?</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Drive - O que motiva a movimentação?</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Papéis e Responsabilidades</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Na sua visão qual o projeto mais motivador na sua carreira?</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Modelo de Trabalho Atual</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Modelo de Trabalho de Preferência</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Vertical Preferida</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Empresas dos Sonhos</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Regime de Trabalho Atual</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Regime de Trabalho de Preferência</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Salário Atual/Último</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Pretensão Salarial</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>O que o candidato não aceitaria?</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Sobre Moradia:</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Sobre Idiomas:</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>"Sobre Educação, Formação e Intercâmbio:"</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Sobre Drive de Mudança:</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Sobre Responsabilidades Exercidas:</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Sobre Indicadores</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Cases de Sucesso:</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>"Competências (% de Executor, Gestor e Estratégico)"</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Pontos Fortes e Especiais:</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Pontos a desenvolver:</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Observação sobre remuneração:</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Benefícios atuais ou últimos benefícios</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>O candidato aceita que seu perfil seja enviado de forma oculta a outros clientes pela Harpio?</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Participando de outros processos seletivos:</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Faça uma sustenção do candidato</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Resumo Geral</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Sobre habilidades Técnicas (Hard Skill)</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Sobre Habilidades Interpessoais (Soft Skill)</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Faça Um parecer completo sobre o Perfil Técnico</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+    <tr>
+      <td>Faça Um parecer cpmpleto sobre o perfil Comportamental</td>
+      <td>**[Insira a resposta aqui]**</td>
+    </tr>
+  </tbody>
+</table>
+ 
+
+                        `; // Adapte o prompt como necessário
+
+            try {
+                const response = await modelo.generateContent(prompt, {
+                    temperature: parseFloat(temperatureSlider.value), // Use a temperatura configurada
+                    safetySettings: {
+                        harassment: harassmentSelect.value,
+                        hate: hateSelect.value,
+                        sexuallyExplicit: sexuallyExplicitSelect.value,
+                        dangerousContent: dangerousContentSelect.value
+                    },
+                    maxOutputTokens: parseInt(outputLengthInput.value) // Use o tamanho máximo de tokens configurado
+                });
+
+                if (response.response && response.response.candidates && response.response.candidates.length > 0) {
+                    const text = response.response.candidates[0].content.parts[0].text;
+
+                    // Aplique formatação Markdown à resposta
+                    const formattedText = text;
+                    atsResponseDiv.innerHTML = formattedText; 
+                    totalCaracteresSaida += text.length; // Adicione os tokens da resposta
+                    totalCaracteres += text.length;
+                    totalTokens += text.length;
+                } else {
+                    atsResponseDiv.innerHTML = 'Ocorreu um erro na comunicação com o Gemini. Por favor, tente novamente.';
+                }
+            } catch (error) {
+                atsResponseDiv.innerHTML = 'Ocorreu um erro na comunicação com o Gemini. Por favor, tente novamente.';
+            }
+        }
+
+
+        const generateAtsButton = document.getElementById('generate-ats-button');
+        generateAtsButton.addEventListener('click', generateAtsResponse);
+
+
+
+        // Função para gerar a resposta na aba "Technical Opinion"
+        async function generateTechnicalOpinion() {
+            const technicalOpinionResponseDiv = document.getElementById('technical-opinion-response');
+            technicalOpinionResponseDiv.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Carregando...';
+
+            // Prompt pré-definido para a aba "Technical Opinion"
+            const prompt = `O texto a seguir é um fragmento de um arquivo:\n\n` +
+                (arquivoConteudo ? `**Transcrição:**\n${arquivoConteudo}\n\n` : '') +
+                (arquetipoConteudo ? `**Arquétipo:**\n${arquetipoConteudo}\n\n` : '') +
+                (discConteudo ? `**DISC:**\n${discConteudo}\n\n` : '') +
+                (linkedinConteudo ? `**Resumo LinkedIn:**\n${linkedinConteudo}\n\n` : '') +
+                (jobDescriptionConteudo ? `**Job Description:**\n${jobDescriptionConteudo}\n\n` : '') +
+                `Com base nesse contexto, atue como um talent-hunter experiente e crie um parecer técnico sobre o candidato em questão mostrando todos as sua habilidades e hardskills, esse parecer dever no formato markdown e ter ao menos 1500 palavras, crie dois pareceres um mostrando todos os dados como nome do candidato e empresas que tenham trabalhado e isntituições que estudou o utro você chamará de Parecer Blind e reescreverá o mesmo parecer sem mostrar nenhum dado do candidato como Nome, empresasque trabalhou e escolas que estudou.`; // Adapte o prompt como necessário
+
+            try {
+                const response = await modelo.generateContent(prompt, {
+                    temperature: parseFloat(temperatureSlider.value), // Use a temperatura configurada
+                    safetySettings: {
+                        harassment: harassmentSelect.value,
+                        hate: hateSelect.value,
+                        sexuallyExplicit: sexuallyExplicitSelect.value,
+                        dangerousContent: dangerousContentSelect.value
+                    },
+                    maxOutputTokens: parseInt(outputLengthInput.value) // Use o tamanho máximo de tokens configurado
+                });
+
+                if (response.response && response.response.candidates && response.response.candidates.length > 0) {
+                    const text = response.response.candidates[0].content.parts[0].text;
+
+                    // Aplique formatação Markdown à resposta
+                    const formattedText = text.replace(/^(#+)\s+(.+)$/gm, '<h$1>$2</h$1>') // H1 a H6
+                                            .replace(/\*\*([^*]+)\*\*/gm, '<b>$1</b>')
+                                            .replace(/__([^_]+)__/gm, '<b>$1</b>')
+                                            .replace(/\*([^*]+)\*/gm, '<i>$1</i>')
+                                            .replace(/_([^_]+)_/gm, '<i>$1</i>')
+                                            .replace(/`([^`]+)`/gm, '<code>$1</code>')
+                                            .replace(/~~([^~]+)~~/gm, '<s>$1</s>')
+                                            .replace(/\[([^\]]+)\]\(([^)]+)\)/gm, '<a href="$2">$1</a>')
+                                            .replace(/!\[([^\]]+)\]\(([^)]+)\)/gm, '<img src="$2" alt="$1">')
+                                            .replace(/---/gm, '<hr />')
+                                            .replace(/^\s*(\d+)\.\s+(.+)$/gm, '<ol><li>$1. $2</li>')
+                                            .replace(/^(\d+)\.\s+/gm, '<ol><li>$1.</li>')
+                                            .replace(/\s+(\d+)\.\s+/gm, '<li>$1.</li>')
+                                            .replace(/(\d+)\.\s*$/gm, '</li></ol>')
+                                            .replace(/^\s*\*\s+(.+)$/gm, '<ul><li>$1</li>')
+                                            .replace(/^\s*\+\s+(.+)$/gm, '<ul><li>$1</li>')
+                                            .replace(/^\s*\-\s+(.+)$/gm, '<ul><li>$1</li>')
+                                            .replace(/\*\s*/gm, '</li>')
+                                            .replace(/\+\s*/gm, '</li>')
+                                            .replace(/\-\s*/gm, '</li>')
+                                            .replace(/\*\s*$/gm, '</li></ul>')
+                                            .replace(/\+\s*$/gm, '</li></ul>')
+                                            .replace(/\-\s*$/gm, '</li></ul>')
+                                            .replace(/\|(.+)\|/gm, '<tr><td>$1</td></tr>')
+                                            .replace(/\|(.+)\|(.+)\|(.+)\|/gm, '<tr><td>$1</td><td>$2</td><td>$3</td></tr>')
+                                            .replace(/^\s*\|(.+)\|\s*$/gm, '<th>$1</th>')
+                                            .replace(/```\n(.+?)\n```/gms, '<pre>\n$1\n</pre>')
+                                            .replace(/^>\s+(.+)$/gm, '<blockquote>$1</blockquote>')
+                                            .replace(/^>\s*$/gm, '</blockquote>')
+                                            .replace(/  \s*$/gm, '<br>')
+                                            .replace(/\. /g, '.  <br>')
+                                            .replace(/<li><li>/gm, '<li>')
+                                            .replace(/<li><\/li><li>/gm, '<li>')
+                                            .replace(/<\/li><li>/gm, '<li>')
+                                            .replace(/<li><\/li>/gm, '<li>')
+                                            .replace(/<\/li><li><\/li>/gm, '<li>')
+                                            .replace(/<br>/g, '<br><br>')
+                                            .replace(/<br><br><br>/g, '<br><br>')
+                                            .replace(/<br><br>/g, '<br><br>');
+
+                    technicalOpinionResponseDiv.innerHTML = formattedText; 
+                    totalCaracteresSaida += text.length; // Adicione os tokens da resposta
+                    totalCaracteres += text.length;
+                    totalTokens += text.length;
+                } else {
+                    technicalOpinionResponseDiv.innerHTML = 'Ocorreu um erro na comunicação com o Gemini. Por favor, tente novamente.';
+                }
+            } catch (error) {
+                technicalOpinionResponseDiv.innerHTML = 'Ocorreu um erro na comunicação com o Gemini. Por favor, tente novamente.';
+            }
+        }
+
+        const generateTechnicalOpinionButton = document.getElementById('generate-technical-opinion-button');
+        generateTechnicalOpinionButton.addEventListener('click', generateTechnicalOpinion);
+
+        
+
+        // Função para gerar a resposta na aba "Behavioral Opinion"
+        async function generateBehavioralOpinion() {
+            const behavioralOpinionResponseDiv = document.getElementById('behavioral-opinion-response');
+            behavioralOpinionResponseDiv.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Carregando...';
+
+            // Prompt pré-definido para a aba "Behavioral Opinion"
+            const prompt = `O texto a seguir é um fragmento de um arquivo:\n\n` +
+                (arquivoConteudo ? `**Transcrição:**\n${arquivoConteudo}\n\n` : '') +
+                (arquetipoConteudo ? `**Arquétipo:**\n${arquetipoConteudo}\n\n` : '') +
+                (discConteudo ? `**DISC:**\n${discConteudo}\n\n` : '') +
+                (linkedinConteudo ? `**Resumo LinkedIn:**\n${linkedinConteudo}\n\n` : '') +
+                (jobDescriptionConteudo ? `**Job Description:**\n${jobDescriptionConteudo}\n\n` : '') +
+                `Com base nesse contexto, atue como um talent-hunter experiente e crie um parecer Comportamental e Interpessoal sobre o candidato em questão mostrando todos as sua habilidades interpessoais e SoftSkills, esse parecer dever ser no formato markdown e ter ao menos 1500 palavras`; // Adapte o prompt como necessário
+
+            try {
+                const response = await modelo.generateContent(prompt, {
+                    temperature: parseFloat(temperatureSlider.value), // Use a temperatura configurada
+                    safetySettings: {
+                        harassment: harassmentSelect.value,
+                        hate: hateSelect.value,
+                        sexuallyExplicit: sexuallyExplicitSelect.value,
+                        dangerousContent: dangerousContentSelect.value
+                    },
+                    maxOutputTokens: parseInt(outputLengthInput.value) // Use o tamanho máximo de tokens configurado
+                });
+
+                if (response.response && response.response.candidates && response.response.candidates.length > 0) {
+                    const text = response.response.candidates[0].content.parts[0].text;
+
+                    // Aplique formatação Markdown à resposta
+                    const formattedText = text.replace(/^(#+)\s+(.+)$/gm, '<h$1>$2</h$1>') // H1 a H6
+                                            .replace(/\*\*([^*]+)\*\*/gm, '<b>$1</b>')
+                                            .replace(/__([^_]+)__/gm, '<b>$1</b>')
+                                            .replace(/\*([^*]+)\*/gm, '<i>$1</i>')
+                                            .replace(/_([^_]+)_/gm, '<i>$1</i>')
+                                            .replace(/`([^`]+)`/gm, '<code>$1</code>')
+                                            .replace(/~~([^~]+)~~/gm, '<s>$1</s>')
+                                            .replace(/\[([^\]]+)\]\(([^)]+)\)/gm, '<a href="$2">$1</a>')
+                                            .replace(/!\[([^\]]+)\]\(([^)]+)\)/gm, '<img src="$2" alt="$1">')
+                                            .replace(/---/gm, '<hr />')
+                                            .replace(/^\s*(\d+)\.\s+(.+)$/gm, '<ol><li>$1. $2</li>')
+                                            .replace(/^(\d+)\.\s+/gm, '<ol><li>$1.</li>')
+                                            .replace(/\s+(\d+)\.\s+/gm, '<li>$1.</li>')
+                                            .replace(/(\d+)\.\s*$/gm, '</li></ol>')
+                                            .replace(/^\s*\*\s+(.+)$/gm, '<ul><li>$1</li>')
+                                            .replace(/^\s*\+\s+(.+)$/gm, '<ul><li>$1</li>')
+                                            .replace(/^\s*\-\s+(.+)$/gm, '<ul><li>$1</li>')
+                                            .replace(/\*\s*/gm, '</li>')
+                                            .replace(/\+\s*/gm, '</li>')
+                                            .replace(/\-\s*/gm, '</li>')
+                                            .replace(/\*\s*$/gm, '</li></ul>')
+                                            .replace(/\+\s*$/gm, '</li></ul>')
+                                            .replace(/\-\s*$/gm, '</li></ul>')
+                                            .replace(/\|(.+)\|/gm, '<tr><td>$1</td></tr>')
+                                            .replace(/\|(.+)\|(.+)\|(.+)\|/gm, '<tr><td>$1</td><td>$2</td><td>$3</td></tr>')
+                                            .replace(/^\s*\|(.+)\|\s*$/gm, '<th>$1</th>')
+                                            .replace(/```\n(.+?)\n```/gms, '<pre>\n$1\n</pre>')
+                                            .replace(/^>\s+(.+)$/gm, '<blockquote>$1</blockquote>')
+                                            .replace(/^>\s*$/gm, '</blockquote>')
+                                            .replace(/  \s*$/gm, '<br>')
+                                            .replace(/\. /g, '.  <br>')
+                                            .replace(/<li><li>/gm, '<li>')
+                                            .replace(/<li><\/li><li>/gm, '<li>')
+                                            .replace(/<\/li><li>/gm, '<li>')
+                                            .replace(/<li><\/li>/gm, '<li>')
+                                            .replace(/<\/li><li><\/li>/gm, '<li>')
+                                            .replace(/<br>/g, '<br><br>')
+                                            .replace(/<br><br><br>/g, '<br><br>')
+                                            .replace(/<br><br>/g, '<br><br>');
+
+                    behavioralOpinionResponseDiv.innerHTML = formattedText; 
+                    totalCaracteresSaida += text.length; // Adicione os tokens da resposta
+                    totalCaracteres += text.length;
+                    totalTokens += text.length;
+                } else {
+                    behavioralOpinionResponseDiv.innerHTML = 'Ocorreu um erro na comunicação com o Gemini. Por favor, tente novamente.';
+                }
+            } catch (error) {
+                behavioralOpinionResponseDiv.innerHTML = 'Ocorreu um erro na comunicação com o Gemini. Por favor, tente novamente.';
+            }
+        }
+
+        // Adicionar um ouvinte de eventos ao botão "Gerar"
+        const generateBehavioralOpinionButton = document.getElementById('generate-behavioral-opinion-button');
+        generateBehavioralOpinionButton.addEventListener('click', generateBehavioralOpinion);
+
+    </script>
+    <script>
+        async function validateApiKey() {
+            const apiKey = apiKeyInput.value.trim();
+            if (apiKey) {
+                try {
+                    genAI = new GoogleGenerativeAI(apiKey);
+                    const response = await genAI.getGenerativeModel({ model: 'gemini-1.5-flash' }).generateContent("Olá mundo!", {});
+                    if (response.response && response.response.candidates && response.response.candidates.length > 0) {
+                        alert("API KEY válida!");
+                    } else {
+                        alert("API KEY inválida. Por favor, verifique a chave.");
+                    }
+                } catch (error) {
+                    alert("API KEY inválida. Por favor, verifique a chave.");
+                }
+            } else {
+                alert("Por favor, insira uma API KEY.");
+            }
+        }
+        const validateApiKeyButton = document.getElementById('validate-api-key');
+        validateApiKeyButton.addEventListener('click', validateApiKey);
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

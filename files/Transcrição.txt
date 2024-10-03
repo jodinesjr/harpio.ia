@@ -1,0 +1,482 @@
+﻿Meet Meeting 
+qua., 18 de set. de 2024
+
+
+0:00 - Jodines Guerrato 
+na minha agenda, tá?
+
+
+0:01 - Denise Braguin 
+Fica tranquilo, não tem problema nenhum.
+
+
+0:04 - Jodines Guerrato 
+Tudo certo. E aí, tá muito frio, muito calor por aí? Como estão as coisas?
+
+
+0:11 - Denise Braguin 
+Aqui tá um tempo bem gostoso, né? Com essa chuva que deu, tá um pouco mais úmido, né? Então, deu uma aliviada naquele calor que tava semana passada, né? Então, tá tudo bem, assim, tô adorando esse clima. Mas eu sei que é por pouco tempo, daqui a pouco, né? Tudo volta.
+
+
+0:27 - Jodines Guerrato 
+É bom aproveitar, tem que dar mais tempo demais, ainda bem que deu nessa, me decida no tempo. Sim, sim. Denise, vamos lá. Eu não sei se já te explicaram sobre a vaga, sobre essa vaga de UX Design Pleno que a gente tem da Árpio, não sei até onde você já sabe também sobre a Árpio, mas eu vou te explicar aqui rapidinho, Primeiro, o que é a Árpio e o que é essa oportunidade que surgiu faz pouco tempo para equipes de design. E a ideia não é fazer nenhuma avaliação, por enquanto, mas, sim, é um bate-papo, como um onboarding aqui do processo deles. Então, a partir dessa entrevista inicial, que a gente vai fazer para conhecer melhor, já passou pela primeira etapa etapa de triagem, tá? Então, a gente já sabe que muito da sua experiência, pelo que a gente pôde ver pelo seu currículo, pelo seu LinkedIn, já tá muito próximo daquilo que a gente precisa. Agora, a ideia é só conhecer melhor, né? Entender ali os seus motivadores, né? Entender como que essa sua experiência atribuiria com valor as nossas necessidades. Beleza?
+
+
+1:53 - Unidentified Speaker 
+Beleza.
+
+
+1:55 - Denise Braguin 
+Eu li um pouco sobre a ARP, eu dou uma pesquisada para entender como que as minhas experiências na área de design poderiam se encaixar com a empresa e eu vi que vocês têm aí uma linha de recrutamento e seleção, digitalização de produtos, que eu acho bem interessante, bem próximo ao que eu busco, eu gosto muito da proposta da empresa E a oportunidade também, eu achei que ela tem bastante sintonia com as minhas expectativas.
+
+
+2:30 - Jodines Guerrato 
+Muito bom, muito bom. A ideia é que a gente transformar o processo de recrutamento e seleção, deixar ele mais ágil, mais assertivo, mais eficiente. E a Arp está com uma abordagem diferente da concorrência. Onde ela consegue trabalhar justamente com a predição de candidatos. Então, aqui a gente tem um ecossistema grande, então, são diversos produtos e subprodutos. O que a gente precisa agora, essa vaga, é para olhar para a nossa plataforma de recrutamento, que é o nosso maior produto, para cuidar de uma etapa ali da nossa junta mas eu queria primeiro saber como você chegou até aqui, Denise. Então, queria entender melhor, queria que você me contasse um pouco mais sobre a sua jornada com o UX Design, o que te encantou nesse universo, conhecer algum projeto seu que você tem orgulho, que queira comentar aqui com a gente, e por que você está buscando essa oportunidade oportunidade, né? Porque você está aqui interessado em entrar para o time da Arq.
+
+
+3:51 - Unidentified Speaker 
+Perfeito.
+
+
+3:52 - Denise Braguin 
+Bom, eu tenho me candidatado a algumas vagas ultimamente para buscar novos desafios e eu encontrei uma vaga de vocês no LinkedIn e eu pesquisei, me candidatei, eu entrei em contato com a pessoa que estava fazendo o pesquisa e pedi para participar do processo, fiz conexão no LinkedIn e aí eu consegui ter essa oportunidade de vocês me conhecerem. Olhando um pouco para um todo, eu penso que oportunidades a gente busca, então eu estou indo atrás de crescimento. Hoje eu posso me considerar um pleno, mas eu tenho interesse candidatar para vagas pleno sênior, até porque eu tenho em torno de dois anos e meio, três anos na área de UX, mas de mercado eu tenho quase 20 anos, então acredito que eu posso não ter muito tempo de experiência técnica na área, mas eu tenho algumas soft skills que com o decorrer do tempo me trouxeram uma bagagem grande para conseguir identificação de oportunidades, e isso é algo que eu acho que é bem rico.
+
+
+5:11 - Jodines Guerrato 
+Agora, você está há três anos como UX Design Júnior? Sim.
+
+
+5:16 - Unidentified Speaker 
+Perfeito.
+
+
+5:18 - Denise Braguin 
+Na realidade, estou há três anos como Pleno. Está certo. Já como Pleno.
+
+
+5:23 - Jodines Guerrato 
+Como Pleno, como Pleno.
+
+
+5:24 - Denise Braguin 
+Três anos. Eu comecei a trabalhar nessa área inicialmente fazendo alguns projetos pontuais para designer mesmo, E eu tive a oportunidade de um colega de trabalho, um colega na época, ele me indicar a profissão e ele falou, olha, bem interessante. Eu comecei a ver que tem muita sinergia com o que eu gosto, porque eu penso que o X-Design, ele é um produto, é uma profissão voltada pra pessoas. E eu sempre, em toda a minha carreira, sempre quis fazer coisas que fossem voltadas pra pessoas. Desde ajudar em alguma situação, algum problema, e eu vejo porque essa área de UX, ela é bem voltada para isso. Então aqui, com o digital, a gente pode resolver a vida das pessoas. Ajudar, pelo menos.
+
+
+6:11 - Jodines Guerrato 
+Então esse foi um dos motivadores que fez você migrar de carreira, né? Você fez migração de carreira, certo?
+
+
+6:18 - Denise Braguin 
+Sim, sim. Eu atuava como líder no departamento comercial. Quando eu tive, depois que eu retornei da minha nascença à maternidade, eu acabei saindo da empresa, mas antes disso eu já estava estudando, eu já tinha me inscrito numa faculdade de front-end, onde inicialmente eu estava estudando algumas coisas básicas de HTML, CSS, JavaScript, mas ainda não tinha 100% em mente o que eu queria ser, porque eu ainda estava experimentando coisas. E aí quando eu tive contato numa empresa que eu trabalhei, contato com UX Design, eu me apaixonei. É isso que eu quero. Ela une todas as coisas que eu gosto no trabalho. Então, tem autonomia, criatividade, tem processos. Enfim, uma série de coisas que eu defendo muito nessa área.
+
+
+7:11 - Jodines Guerrato 
+Muito bom, muito bom. E tem... Nessa sua trajetória, qual seria um projeto do qual você participou que você se orgulha bastante? E qual foi o seu papel nesse projeto?
+
+
+7:26 - Denise Braguin 
+Eu tenho alguns projetos em mente, mas eu vou destacar o último, porque eu acho que ele foi o mais importante. Antes de eu fazer a migração de carreira, eu estava como assistente comercial. E nós tínhamos uma equipe, que era uma equipe nova, chamada Equipe Prospect, onde tinha um site que nós estávamos para lançar, que era o B2B. Só que a pessoa que estava nessa cadeira, ela acabou saindo por questões pessoais, E acabou acumulando muita coisa. Na época que eu fui pegar o processo pra fazer, eu tinha mais de mil e-mails pra poder validar. E clientes ligando, estressado, querendo ser atendido. E a gente não podia fazer venda direta. A gente tinha que induzir o cliente a fazer o login, a se cadastrar na plataforma, a fazer a sua compra online. E pensando no nicho que nós trabalhávamos de indústria, pra pessoas que trabalham com laticínios, que muitas vezes não tem acesso a tecnologia, foi um desafio muito grande. Então, junto com a equipe, nós desenvolvemos ali um passo a passo pra gente poder passar pro cliente algumas formas de abordagens pra ajudar o cliente. E eu sei que, assim, nesse período de um ano que eu fiquei, nós conseguimos migrar quase 80% dos clientes que faziam questão de comprar por telefone, que estavam habituados a comprar com o vendedor, migrar pela plataforma e comprar, e fazer recompra, que aí a recompra é onde nós obtivemos o resultado. Então, esse processo, ele não se trata só de venda, mas se trata de experiência. Porque durante essa jornada, nós identificávamos quais eram os problemas impactantes para que o cliente conseguisse colocar um produto no carrinho, para que ele conseguisse finalizar um orçamento. E eu trabalhei de forma muito junto com o departamento comercial, perdão, com o departamento de marketing, onde eles faziam esses ajustes dentro da plataforma. E aí nós conseguimos bater as metas mensais, então foi um desafio muito grande e bem realizador, porque ninguém acreditava, porque imagina, você ter um público onde as pessoas estão acostumadas 100% para um atendimento por um humano e você conseguir convencer pelas pessoas que não têm acesso, muitas vezes, a computador. Então você tinha que assinar a fazer pelo celular. Ou que não tinha muito hábito de utilizar uma internet a não ser para utilizar um WhatsApp. Mas foi bem interessante porque a gente conseguiu chegar no resultado. E hoje a plataforma é uma das principais... Um dos principais canais de vendas da empresa.
+
+
+10:12 - Jodines Guerrato 
+Bom, eu vi que você falou a gente, a gente como time. Mas e o seu papel? Como foi a sua contribuição para esse resultado? Eu fui a pioneira, né?
+
+
+10:25 - Denise Braguin 
+Então, vamos dizer assim, que eu que peguei todo o processo atrasado e eu tive que fazer a implantação disso. Então, eu tive que fazer on-board da plataforma, fazer treinamento, fazer os primeiros passos, configurações, ajustes de produtos. Então, num primeiro momento, Eu fui a 100% operacional, implantação. Depois de um determinado momento, aí eu recebi uma equipe, que é onde eu me tornei líder dessa equipe. Eu recebi quatro pessoas que ficaram ali junto a mim. Então, eu fazia a manutenção junto com elas, acompanhava as vendas, acompanhava os problemas críticos. Então, aí eu passei de ser a operacional pra fazer a gestão, tanto de pessoas quanto da plataforma.
+
+
+11:13 - Jodines Guerrato 
+Aqui na Arca, a gente é um time apaixonado por inovação. A gente tem essa cultura que valoriza a colaboração e busca constantes soluções sempre criativas. Você se vê nesse ambiente? Você acha que se encaixa nesse ambiente de inovação? Com certeza.
+
+
+11:32 - Denise Braguin 
+Eu penso que o que a gente tem de problema, tudo é problema. Então, você identifica um problema, você tem que... Ver uma forma de resolver esse problema. E a forma é sempre com base na criatividade. O que eu não pensei, eu tenho que pensar. Então, tudo é imaginar, é criativo. A gente tem chance de errar, de acertar. Isso aí não tem o que fazer. Mas tudo com base, penso, em pesquisas, com base em fundamentos, a gente tem oportunidade de tentar melhorar as coisas de forma mais criativa. Como que é, Denise?
+
+
+12:07 - Jodines Guerrato 
+Como que é trabalhar minha equipe, com a Denise, como que você lida com autonomia, com proatividade?
+
+
+12:20 - Denise Braguin 
+Eu sou uma pessoa muito proativa, eu dificilmente gosto de ficar parada, então mesmo que eu acabe as minhas atividades um pouco antes do previsto, eu sempre tô mantendo a ser uma pessoa ativa, e que isso às vezes pode ser um ponto ruim, porque isso pode me algum tipo de sobrecarga mental. Quanto a trabalhar em equipe, eu gosto de trabalhar em equipe, embora algumas atividades eu prefira fazer sozinha, principalmente porque essa área de design a gente tem muito lado criativo, às vezes a gente precisa parar pra pensar, então acho que existem pontos de contato onde trabalhar em equipe é muito bem-vindo e outros é preferível a gente trabalhar sozinha. Eu gosto de trabalhar em equipe, mas eu não gosto de trabalhar em equipes muito grandes, porque eu acho que acaba se tornando como foi no caso que eu trabalhei com quase 40 mulheres no comercial. Então, eu prefiro uma equipe mais pequena, de 5 a 10 pessoas no máximo. Perfeito, perfeito.
+
+
+13:20 - Jodines Guerrato 
+Então, você gosta também de ter mais autonomia nas suas tarefas, né? Sim. Ok. O Figma é a nossa ferramenta de design principal, tá? No time de design, tá, Denise? E aí, eu queria compartilhasse comigo as suas experiências com a ferramenta, né? Quais projetos que você chegou a desenvolver ali, teve que utilizar o Figma e qual que é o nível de expertise que você se considera, né? Dentro ali da habilidade de condução do Figma, não só de desenvolvimento, mas também de organização, né? E de hand-off também junto desenvolvimento?
+
+
+14:07 - Denise Braguin 
+Eu desenvolvi um redesign, recentemente, de um aplicativo de banco, onde nós tínhamos que dar a opção para a pessoa cobrar dinheiro. A gente não tinha essa função dentro do aplicativo. Então, assim, Figma é a última etapa. Então, a gente teve todo um trabalho de discovery, de entendimento, desk research. Fomos atrás de a capacidade dos usuários, para depois, por último, nós irmos para a UI. Então, nós começamos pelo wide frame, de baixa fidelidade, onde nós conseguimos pegar a concepção inicial do que a gente queria dentro do Figma, né? Eu fiz um rabisco mesmo dentro do Figma. Depois, para o média, validação com o stakeholder e, por último, de alta fidelidade. Eu me considero um nível intermediário, eu sei que ainda existem muitas ferramentas que eu preciso aprender, que é uma deficiência que eu tenho para Design System, onde eu não tenho muitas habilidades em componentização de... Eu esqueci até a palavra. Componentização no geral. Mas eu, em relação a desenvolvimento, a parte interna de Figma, eu tenho uma boa habilidade. Eu sei que sempre seria muito da minha parte falar que eu sou experta, porque a ferramenta, ela tem muitas possibilidades, mas nesses dois anos, três anos que eu estou dentro da ferramenta, eu gosto bastante de trabalhar. Você me dá só um minutinho, Judith? Eu tenho uma filha de dois anos aqui e eu preciso ir lá fazer um leite para ela com maracujá. Você me dá só um minuto?
+
+
+15:45 - Jodines Guerrato 
+Claro, claro. Fique à vontade.
+
+
+15:52 - Unidentified Speaker 
+Prontinho.
+
+
+15:53 - Denise Braguin 
+Já deixei o leite aqui com ela.
+
+
+16:02 - Denise Braguin 
+Eu esqueci de mencionar, esse é um ponto importante, eu tenho uma filha de dois anos. Parabéns.
+
+
+16:08 - Unidentified Speaker 
+Obrigada.
+
+
+16:10 - Jodines Guerrato 
+E qual que é o nível que você se considera no Figma? Você acha que você tem um nível ainda iniciante, intermediário ou avançado?
+
+
+16:20 - Denise Braguin 
+Eu me considero intermediário.
+
+
+16:22 - Unidentified Speaker 
+Intermediário.
+
+
+16:24 - Jodines Guerrato 
+A Arto tá em constante crescimento, tá, Denise? Então, tem diversos projetos e os projetos e prazos desafiadores aparecem a todo momento. Então, sempre precisa ter essa necessidade de se adaptar a essas novas demandas.
+
+
+16:43 - Jodines Guerrato 
+Muitos chamam de loucura, mas é uma forma de a gente acompanhar aqui o mercado. Então, eu queria que você me desse um exemplo de um momento que você teve que lidar com uma situação complexa e como que você encontrou a solução dentro dessa dinâmica de múltiplos projetos.
+
+
+17:04 - Denise Braguin 
+Eu não sei se eu vou conseguir te responder ao pé da letra, mas me veio em mente aqui um problema que eu enfrentei. Antes de entrar para o time comercial, eu trabalhava com o departamento de faturamento. E eu era responsável em realizar as cotações de todos os vendedores. A gente tinha 40 vendedores, então a gente tinha ali uma demanda muito grande. Então, eu tinha que me desdobrar entre várias as tarefas ao mesmo tempo. E para resolver o problema, acho que foi uma alternativa que eu encontrei de tentar criar uma interface junto com a transportadora, onde o próprio vendedor conseguisse fazer a cotação. E isso impactou positivamente nos números da empresa, tanto na parte de logística, que a gente começou a ter um pouco mais de agilidade. Então, o que se trata? Esse problema. É a identificação de um problema, administração de múltiplos projetos, porque eu tinha que continuar fazendo o faturamento, tinha que continuar agendando a coleta e fazendo cotações de frete. E eu me desdobrei, consegui implementar, tive os meus desafios, foram um projeto de mais ou menos uns oito meses, porque não dependia só de mim, mas sim de uma série de questões de negociação, então eu tive essa interface até com negociação do comercial da transportadora para conseguir desconto, para conseguir também junto com eles, o departamento técnico deles de TI, perdão, implementar isso. Então, esse foi um projeto multidisciplinar em cima de um problema e que no fim do problema, quando chegava uma época de dezembro, nós tínhamos que... Tínhamos problemas gigantes, porque eram 50, 60 transportadoras E eu consegui unificar tudo para uma transportadora só, para a região sul. Então, a gente diminuiu aí a quantidade de 60% de transportes dentro da empresa. Então, foi uma frente que eu tive. E assim, como ambiente de startup, eu sei que também são prazos urgentes, são várias funções que você tem que executar dentro de um projeto. Então, eu me identifico bem por conta dessa questão que eu passei no passado. Perfeito, perfeito.
+
+
+19:20 - Jodines Guerrato 
+Aqui na área da gente prioriza muito a comunicação. A gente acredita que essa é a base para qualquer fórmula de sucesso. A gente ter um ambiente com uma comunicação transparente, clara e também colaborativa. Então, eu queria entender como você se comunica com os desenvolvedores hoje. Eu queria que você compartilhasse um exemplo de um projeto que você fez o hand-off para a equipe de desenvolvimento desenvolvimento e como que você garante que essa comunicação seja clara e eficiente com eles? Nós criamos uma documentação dentro do próprio Figma.
+
+
+20:00 - Denise Braguin 
+Dentro dessa documentação, a gente relata passo a passo do que é esperado do comportamento da interface, com todos os tipos de problemas que podem ser encontrados, com suas variações. Então, nosso processo de hand-off é bem minucioso, Então, ele passa por uma das tarefas que nós dividimos dentro da nossa história, vamos dizer assim, né? A gente divide uma parte só para handoff. Então, onde a gente observa tudo, vê, faz conferência. E antes até do handoff, a gente faz uma validação técnica que possibilita identificar qualquer problema antes que vá para desenvolvimento. Então, com essa documentação completa que a gente faz e depois a gente marca uma cerimônia de handoff com os desenvolvedores. Então, para isso, a gente mitiga todos os problemas possíveis. Obviamente que se tiverem dúvidas durante o processo, isso é normal e é sempre uma agenda que a gente sempre tenta suprir.
+
+
+20:56 - Jodines Guerrato 
+Perfeito, perfeito. Denise, eu vou fazer algumas perguntas para você agora, que é muito mais para a gente customizar as suas preferências, as suas pretensões, também ali com o que a vaga oferece. Então a ideia é que a gente entender se não se você serve pra vaga mas se a vaga serve pra você também.
+
+
+21:25 - Denise Braguin 
+Tá bom. Posso fazer um pedido primeiro?
+
+
+21:27 - Unidentified Speaker 
+Claro.
+
+
+21:29 - Denise Braguin 
+Tem que atender a campainha aqui porque tá chegando meu marido agora ele começou a descobrir o Existe a Shopping. Ele não para de comprar coisas então eu preciso ir lá atender.
+
+
+21:43 - Denise Braguin 
+5 5 minutos, só um minutinho, tá? Ok, ok, sem problemas.
+
+
+21:48 - Unidentified Speaker 
+Pronto, voltei.
+
+
+21:50 - Denise Braguin 
+Foi rápido, foi rápido.
+
+
+21:51 - Jodines Guerrato 
+Se precisar mais tempo, não se preocupe.
+
+
+21:53 - Unidentified Speaker 
+Tranquilo.
+
+
+21:56 - Jodines Guerrato 
+Nemise, atualmente você está trabalhando? Sim. O que que motiva hoje você procurar novas oportunidades?
+
+
+22:08 - Denise Braguin 
+Crescimento profissional, em primeiro lugar. Hoje, a estrutura onde eu estou está um pouco enxuta. Então, existe aí uma possibilidade real de desligamento. A minha líder foi desligada recentemente. Então, a gente está passando por um lay-off aí dentro da empresa. Então, isso me acendeu um alerta para buscar outras oportunidades.
+
+
+22:31 - Jodines Guerrato 
+Perfeito. Qual que é o seu modelo de trabalho atual? Funciona o seu modelo de trabalho atual? Você prefere trabalhar como em office, no trutório, híbrido?
+
+
+22:42 - Denise Braguin 
+Hoje eu trabalho híbrido e eu procuro algo de híbrido também. É saudável a gente poder sair de vez em quando para o escritório.
+
+
+22:50 - Jodines Guerrato 
+E quantas vezes você vai para o escritório por semana ou por mês?
+
+
+22:56 - Denise Braguin 
+Eu vou três vezes por semana. Uma vez por semana.
+
+
+23:00 - Jodines Guerrato 
+Então o o modelo híbrido uma vez por semana seria o modelo de trabalho de preferência, certo? Sim, sim. Qual é a vertical, a área que mais te atrai? Aqui a gente está no ramo de recrutamento e seleção de recursos humanos e essa é uma das áreas suas de pretensão? Em qual mais áreas você gostaria de trabalhar?
+
+
+23:36 - Denise Braguin 
+Eu sou formada em Recursos Humanos. Durante um certo tempo, eu até me abstive da área e nunca pensei em voltar para a área de Recursos Humanos. Então, a área de Recursos Humanos é interessante porque hoje, com a união da área que eu trabalho, eu gosto. Mas preferencialmente, sem tecnologia. Como eu sei que vocês têm um hub de tecnologia dentro da sua empresa, acredito que seria perfeito para mim. Ok, ok.
+
+
+24:06 - Jodines Guerrato 
+E quais são as empresas que te brilham os olhos? Quais são as empresas dos seus sonhos? A gente já sabe que a Arp pode virar uma, mas o que é que sempre teve ali no seu olhar como objetivo? Quais dessas empresas Seria ali, para você, uma grande conquista trabalhar?
+
+
+24:30 - Unidentified Speaker 
+Nubank.
+
+
+24:32 - Denise Braguin 
+Eu gosto muito da plataforma. Eu acho uma plataforma muito intuitiva. Até meu pai consegue usar um Nubank. Então, meu pai não gosta de tecnologia. Eu vejo que tem uma acessibilidade bem bacana. É iFood, né? Eu gosto muito. Mas isso é uma questão mais pessoal, porque minha cunhada trabalha no iFood e ela me fala e fala coisas maravilhosas de lá, então adoro. São essas duas.
+
+
+25:00 - Jodines Guerrato 
+Atualmente você trabalha com qual regime de trabalho? SLT, PJ?
+
+
+25:06 - Unidentified Speaker 
+PJ.
+
+
+25:06 - Jodines Guerrato 
+Tá com PJ? Isso. E qual que é o regime de trabalho de preferência? Seria PJ mesmo ou SLT?
+
+
+25:16 - Denise Braguin 
+Depende de cada proposta. Tanto faz CLT ou PJ, eu acho que o salário como para PJ deve ser um pouquinho maior do que CLT, mas isso aí é negociado, tá? Perfeito, perfeito.
+
+
+25:28 - Jodines Guerrato 
+Denise, eu vou te fazer duas perguntas agora, que elas são mais sensíveis, mas elas são cruciais para a negociação, que é a questão de benefícios e salários. Atualmente, o seu salário Ele é de qual valor? Cinco mil.
+
+
+25:50 - Denise Braguin 
+Cinco mil.
+
+
+25:52 - Jodines Guerrato 
+E a sua pretensão salarial é de qual valor?
+
+
+25:56 - Denise Braguin 
+De oito a dez. De oito a dez, perfeito.
+
+
+25:59 - Jodines Guerrato 
+Quais são os benefícios que você possui hoje?
+
+
+26:04 - Denise Braguin 
+Eu possuo vale-transporte, para ir uma vez na semana, vale-refeição, gempés, seguro de vida e e plano de saúde. Participação de lucros você não possui? Sim, desculpa, eu esqueci de mencionar, a gente tem um décimo quarto salário e participação de lucros.
+
+
+26:23 - Jodines Guerrato 
+Bom, a participação de lucros ela é de quantos salários?
+
+
+26:28 - Denise Braguin 
+Ela varia muito em torno de dois salários, mais ou menos. Perfeito, perfeito.
+
+
+26:37 - Jodines Guerrato 
+Dentro de um contrato de trabalho, o que o que você não aceitaria de forma nenhuma? Seja por um regime de trabalho ou questão de salário ou modelo de home office ou híbrido, o que você não aceitaria de forma nenhuma?
+
+
+27:00 - Denise Braguin 
+Eu não aceitaria mudança de emprego, perdão, mudança de cidade, mudança de endereço. Perfeito. Onde você mora atualmente?
+
+
+27:10 - Jodines Guerrato 
+São Paulo.
+
+
+27:12 - Denise Braguin 
+No ABC, São Bernardo. São Bernardo, perfeito.
+
+
+27:16 - Jodines Guerrato 
+Idiomas. Eu vi aqui que fala português e inglês. Qual que é o seu nível de proficiência em inglês?
+
+
+27:25 - Denise Braguin 
+Em inglês eu estou estudando em torno de um ano e meio, então eu me considero um básico partindo para o intermediário, que eu faço aula, então ainda eu tô me desenvolvendo. Nível técnico, né?
+
+
+27:44 - Jodines Guerrato 
+Nível técnico.
+
+
+27:45 - Denise Braguin 
+Perfeito, perfeito.
+
+
+27:47 - Jodines Guerrato 
+Agora falando um pouco mais sobre a sua formação, queria que você me falasse um pouco sobre a sua formação, se já está formada, quais são os cursos que você fez até Eu sou formada em Técnica de Segurança do Trabalho,
+
+
+28:06 - Denise Braguin 
+em Recursos Humanos, e recentemente eu estou finalizando o curso de Desenvolvimento Fronteente. Devo terminar até o final do ano. Perfeito.
+
+
+28:21 - Jodines Guerrato 
+Hoje, no seu dia a dia, Denise, quais são as suas responsabilidades, aquilo que faz parte da sua rotina diária dentro do seu emprego atual?
+
+
+28:34 - Denise Braguin 
+Eu sou a portadora da bandeira das pesquisas. Então, quando existe alguma pesquisa, algum benchmark, algo relacionado às descobertas, normalmente eu que acabo sendo a responsável, eu tenho as minhas responsabilidades de cooperação com o time, Desenvolvimento de componentes junto com o time e desenvolvimento das telas no geral. Então, não existe uma responsabilidade fixa, né? Então, cada pessoa do time vai recebendo uma determinada tarefa. Então, a partir do momento que você receber aquela tarefa você é responsável da execução de ponta a ponta. É muito dinâmico mesmo, né?
+
+
+29:19 - Jodines Guerrato 
+Sim. E os seus indicadores, né? Quais são os indicadores, as métricas que a Denise segue? Como que você acompanha para medir o sucesso dos seus projetos e das suas entregas?
+
+
+29:31 - Denise Braguin 
+Nós utilizamos o Analytics para as nossas plataformas, onde a gente consegue entender ali, seriam mais questões de acesso e tudo mais. Dentro da parte do produto, o Hotjar, o Hotjar ele mostra para a gente ali o heatmap, como está sendo o acesso, então esses seriam os mais indicadores que a gente tem, obviamente, que a gente também tem várias ali reuniões e apontamentos que a gente vai tendo com o decorrer do tempo. Mas, assim, em relação a plataformas, a gente está utilizando essas duas e o tagueamento também, que ele nos ajuda a entender alguns comportamentos dentro dos nossos produtos.
+
+
+30:15 - Jodines Guerrato 
+Perfeito, perfeito. E aí, agora, eu quero entender um case de sucesso. Eu vi que você já falou de alguns, Eu queria que você compartilhasse um case de sucesso que te orgulhe e que demonstre a sua expertise em design. Se contou alguns cases, mas envolvendo experiências anteriores na área de design. E aí eu queria que você dividisse para a gente, comigo, um case seu, mas já dentro da área de design.
+
+
+30:47 - Denise Braguin 
+Uma das primeiras oportunidades que eu tive de contato com um UI, porque até então eu estava muito mais voltada para ajudar o departamento com pesquisas e tudo mais, mas voltado para a research, né? Eu fui incumbida de um produto, né, que ele mostraria ali alguns valores, panorama, né, que a gente pode dizer assim, mais próximo do mercado da área, né? E aí eu fui atrás para desenvolver tanto a parte de pesquisa, ali de onde que poderia surgir as informações. Então aí eu fui partir com uma IA e dentro desse processo, em colaboração com o Pio na época, nós conseguimos desenvolver o produto de ponta a ponta. Então ele foi desde a pesquisa, onde a gente começou a olhar mercado, até qual a plataforma, o produto que nós íamos utilizar. Fizemos uma execução parcial para poder mostrar esse produto como MVP e conseguir convencer as pessoas. E aí depois veio a parte de UI e implementação e hoje é um produto que é bastante citado dentro da empresa. Isso foi um case bem legal. E esse é um que você tem orgulho, né? Sim, sim.
+
+
+32:03 - Jodines Guerrato 
+Denise, falando de competência, tá? Quais habilidades você considera mais importantes para o sucesso de UI? Profissional de UX Design. Comprometimento.
+
+
+32:17 - Denise Braguin 
+Eu acho que isso é muito importante. Isso em qualquer área, né? Comprometimento. Resiliência, porque a gente tem bastante picos dentro da área, então a gente tem vários altos e baixos, a gente tem que saber lidar com a nossa própria síndrome do impostor. E força de vontade, aprender, mente aberta. Isso eu acho que é o mais importante. Perfeito.
+
+
+32:41 - Jodines Guerrato 
+Você se considera com nível intermediário com a ferramenta Figma e com a ferramenta Sketch. Você tem algum conhecimento?
+
+
+32:54 - Denise Braguin 
+Não, não tenho. O Adobe XD? Eu tenho o pacote Adobe e tenho instalado, mas eu nunca utilizei. Perfeito. O InVision? InVision, eu não sei. Eu acho que ela deve de vídeo? Não tenho certeza, mas eu não conheço. É uma ferramenta de prototipagem.
+
+
+33:13 - Jodines Guerrato 
+Ah, não, não conheço.
+
+
+33:15 - Denise Braguin 
+A gente não utiliza aqui, tá?
+
+
+33:17 - Jodines Guerrato 
+Na árvore.
+
+
+33:19 - Denise Braguin 
+O BotJar, eu considero que eu tenho um ok. Assim, não é uma coisa que eu faço todos os dias, análise, mas eu sempre consigo tirar as análises, então posso me dizer, é um intermediário.
+
+
+33:31 - Unidentified Speaker 
+Perfeito.
+
+
+33:31 - Jodines Guerrato 
+O Google Analytics?
+
+
+33:34 - Denise Braguin 
+Analytics, ele sempre foi uma dificuldade Somente agora com essa movimentação do GA4. Eu me considero um básico para o intermediário.
+
+
+33:45 - Unidentified Speaker 
+Perfeito.
+
+
+33:45 - Jodines Guerrato 
+O WordPress?
+
+
+33:47 - Denise Braguin 
+O WordPress também, básico para o intermediário, embora eu consiga fazer alguns sites, algumas coisas básicas que não requerem muito desenvolvimento do código. Mas eu considero que eu consigo me virar bem.
+
+
+34:00 - Jodines Guerrato 
+Você faz testes de usabilidade com usuários? No seu dia a dia?
+
+
+34:07 - Denise Braguin 
+Sim, sim.
+
+
+34:09 - Jodines Guerrato 
+Você tem alguma ferramenta de preferência para teste de usabilidade com o usuário?
+
+
+34:14 - Denise Braguin 
+Eu posso, eu gosto de muito, tanto moderado como não moderado. Para o moderado eu gosto do Maze.
+
+
+34:24 - Jodines Guerrato 
+O Maze é a sua de preferência, né? Sim. Quais são os seus pontos fortes O design, Denise, a gente sabe que você tem uma bagagem vasta em outras áreas, mas olhando mais para design, algo que te diferencia dos demais?
+
+
+34:46 - Denise Braguin 
+Eu sou muito criativa, com ideias às vezes até consideradas fora da caixinha. Eu acabo colocando para fora muito mais... Eu falo às vezes sem filtro, mas desses... Falar que algumas coisas são bem interessantes. Então, eu acho que não tenho muito medo de errar, né? Mas, ao mesmo tempo, eu tenho cautela. Então, não sei se eu consegui te explicar muito bem. Talvez tenha ficado confuso. Mas eu sou... Tô tentando encontrar a palavra. Eu sou corajosa, né? Então, seria isso. Perfeito.
+
+
+35:27 - Jodines Guerrato 
+Então, a coragem é um ponto especial, então, da Denise, e você vê isso com bons olhos dentro da área de design, ele acha que isso traz evolução, certo? E a desenvolver, Denise, o que você ainda está a caminho e vê que ainda não chegou, mas está trabalhando para isso?
+
+
+35:54 - Denise Braguin 
+Eu tenho uma tendência, embora eu tenha muita coragem, e eu faço as coisas muitas vezes ali com muita emoção e vontade, mas eu me critico muito. Então, isso às vezes é um auto-sabotador. E aí eu tenho muitas vezes que tenho que fazer o meu próprio trabalho várias vezes. E às vezes, cara, tá legal, mas é que eu sempre quero buscar algo que não existe de perfeição. O produto é sempre evolução. Você tá participando de algum outro processo seletivo?
+
+
+36:27 - Jodines Guerrato 
+Então, mais quantos? Mais quatro.
+
+
+36:32 - Denise Braguin 
+Perfeito.
+
+
+36:34 - Jodines Guerrato 
+Denise, eu queria finalizar aqui com você e queria que você me dissesse agora por que você está participando desse processo de trabalhar na Árpio e por que a Árpio ela deve considerar a sua contratação?
+
+
+36:59 - Denise Braguin 
+Eu considero que eu vou ser uma pessoa na equipe que vai poder colaborar bastante. Eu não tenho uma ideia prefixada das coisas, então eu sou muito maleável. Hoje você pode pedir para mim, faz essa função e amanhã você pode requisitar de mim de outra. Eu vejo que eu sou muito colaborativa e isso é uma característica que eu considero importante porque eu trabalho para a empresa, não trabalho por um cargo. Então, acho que isso é essa resiliência que eu tenho entre áreas. Eu acho que isso me permite ser uma pessoa peça-chave no time. E por que a Arp? Porque eu me identifico muito com a proposta de valorização do ser humano como candidato, como o talent hunter ou o hunter ter um respeito pelas pessoas, pelo processo. Enfim, eu acho que a Arpio, ela tem muitos valores diferentes de muitas empresas que eu vejo de recrutamento e seleção, que são só números. Na Arpio, eu acredito que você é diferente, você é uma pessoa, você é um ser humano e que você vai ser tratado com respeito. É uma empatia que eu tenho muito grande. Até porque eu não estou desempregada, mas se eu estivesse, eu poderia estar em um papel mais sensível. E você ser tratada com essa sensibilidade quando você está nesse momento na sua vida é importante. Por isso que eu vou acreditar.
+
+
+38:33 - Jodines Guerrato 
+Quais são os seus objetivos de carreira a longo prazo? Como você se imagina crescendo aqui na Arco e contribuindo para o sucesso da empresa?
+
+
+38:44 - Denise Braguin 
+Eu tenho... Intenções de me tornar uma especialista na área. Não tenho grandes ambições para liderança, então isso é uma coisa que eu não pretendo escalar para esse nível. E eu gostaria de me tornar, sim, uma pessoa importante na tomada de decisões, obviamente dentro dessa área que eu pretendo. Quem sabe um dia conseguir um papel de PO, PM, enfim, eu não sei. Perfeito, perfeito.
+
+
+39:15 - Jodines Guerrato 
+Denise, é isso, tá? Eu agradeço muito aqui você ter doado o seu tempo aqui pra gente, né? Pra gente conhecer melhor. A gente tem uma fase dois, tá? Então, vai ter um desafio de design que a gente vai passar. Eu vou entrar em contato com você pra explicar direitinho como que vai ser essa próxima etapa, né? Agradeço bastante a sua participação e a oportunidade conhecer o seu perfil, você trouxe insights valiosos e demonstra bastante paixão pelo design, né? E me inspirou bastante. Eu não desço. A gente entra em contato para informar os próximos passos nesse nosso processo. Perfeito.
+
+
+39:57 - Denise Braguin 
+Desculpa pelas interrupções aqui dentro da nossa entrevista, mas quando a gente está em casa, acontecem várias coisas inesperadas. Super convencível, sem problema nenhum.
+
+
+40:10 - Jodines Guerrato 
+Muito obrigado, um bom trabalho, um bom dia. Bom dia, obrigada.
+
+
+40:14 - Denise Braguin 
+Tchau.
