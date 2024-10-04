@@ -82,7 +82,6 @@
             <span class="fs-6"><strong> .IA </strong></span>
             </a>
         </header>
-        <button id="googleSignIn" class="btn btn-primary">Entrar com o Google</button>
         <div class="col-md-12 config-column">
             <div style="margin-left: -24px;" class="d-flex align-items-start">
                 <div class="col-md-2 nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -1214,29 +1213,6 @@
         }
         const validateApiKeyButton = document.getElementById('validate-api-key');
         validateApiKeyButton.addEventListener('click', validateApiKey);
-    </script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script>
-        function onSignIn(googleUser) {
-          // Lidar com o login bem-sucedido aqui
-          console.log('Usuário fez login:', googleUser);
-          // ... (Implementar sua lógica para redirecionar ou habilitar conteúdo restrito)
-        }
-    </script>
-    <script>
-        const googleSignInButton = document.getElementById('googleSignIn');
-        googleSignInButton.addEventListener('click', () => {
-          // Disparar o processo de login do Google Sign-In
-          window.google.accounts.id.renderButton(
-            googleSignInButton,
-            {
-              theme: 'outline', // Você pode personalizar o estilo do botão
-              size: 'large',
-              text: 'signin_with',
-              // ... (Outras opções de personalização)
-            }
-          );
-        });
     </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
