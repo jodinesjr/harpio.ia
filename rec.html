@@ -311,30 +311,37 @@
         let user = null;
 
         function handleCredentialResponse(response) {
-            const data = jwt_decode(response.credential);
-            user = {
-                email: data.email,
-                firstName: data.given_name,
-                lastName: data.family_name,
-                picture: data.picture
-            };
+          // Obtém o ID token e outras informações da resposta do Google Sign-In
+          const authResponse = google.accounts.id.getAuthResponse();
+          const idToken = authResponse.id_token;
 
-            // Exibe as informações do usuário
-            document.getElementById('userInfo').innerHTML = `
-                <img src="${user.picture}" alt="Avatar" class="rounded-circle" width="40" height="40">
-                <span class="ml-2">${user.firstName} ${user.lastName} (${user.email})</span>
-            `;
+          // Decodifica o ID token
+          const decodedIdToken = JSON.parse(atob(idToken.split('.')[1]));
 
-            // Esconde o botão de login
-            document.getElementById('googleLogin').style.display = 'none';
+          // Extrai as informações do usuário do ID token
+          user = {
+            email: decodedIdToken.email,
+            firstName: decodedIdToken.given_name,
+            lastName: decodedIdToken.family_name,
+            picture: decodedIdToken.picture
+          };
 
-            // Agora podemos carregar o Google Calendar
-            loadGoogleCalendar();
+          // Exibe as informações do usuário
+          document.getElementById('userInfo').innerHTML = `
+            <img src="${user.picture}" alt="Avatar" class="rounded-circle" width="40" height="40">
+            <span class="ml-2">${user.firstName} ${user.lastName} (${user.email})</span>
+          `;
+
+          // Esconde o botão de login
+          document.getElementById('googleLogin').style.display = 'none';
+
+          // Agora podemos carregar o Google Calendar
+          loadGoogleCalendar();
         }
 
         window.onload = function () {
             google.accounts.id.initialize({
-                client_id: '353192059977-lf4no5ks42afejuqlrr2pq7n0a6bqnhc.apps.googleusercontent.com',
+                client_id: '353192059977-svjv8ol3u13d4d6tprs06nhn0ld1mat2.apps.googleusercontent.com',
                 callback: handleCredentialResponse
             });
 
@@ -349,7 +356,7 @@
     <script>
         function loadGoogleCalendar() {
             const tokenClient = google.accounts.oauth2.initTokenClient({
-                client_id: '353192059977-lf4no5ks42afejuqlrr2pq7n0a6bqnhc.apps.googleusercontent.com',
+                client_id: '353192059977-svjv8ol3u13d4d6tprs06nhn0ld1mat2.apps.googleusercontent.com',
                 scope: 'https://www.googleapis.com/auth/calendar.readonly',
                 callback: handleCalendarResponse
             });
@@ -380,4 +387,4 @@
         }
     </script>    
 </body>
-</html>'
+</html>
