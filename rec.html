@@ -84,8 +84,7 @@
                     <div class="card-body">
                         <div id="radarContainer" style="display:none;" class="mt-2 mb-2">
                             <button class="btn">
-                                <div class="radar">
-                                </div> 
+                                <div class="radar"></div> 
                             </button>
                         </div>
                         <button id="startRecording" class="btn btn-primary">Iniciar Gravação</button>
@@ -241,94 +240,82 @@
                     },
                     body: JSON.stringify({
                         audio_url: audioUrl, // URL do áudio carregado
-                        speech_model: "nano",
-                        language_detection: true,
-                        // speech_model: "best",
-                        // diarization: true // Habilita a diarização se necessário
+                        speech_model: "command_and_search"
                     })
                 });
 
                 const transcriptionData = await transcriptionResponse.json();
-                const transcriptId = transcriptionData.id;
+                const transcriptionId = transcriptionData.id;
 
-                // Verifique o status da transcrição até que esteja completa
-                let isTranscriptionComplete = false;
-                while (!isTranscriptionComplete) {
-                    const resultResponse = await fetch(`https://api.assemblyai.com/v2/transcript/${transcriptId}`, {
+                // Acompanhe o status da transcrição
+                let statusResponse;
+                do {
+                    await new Promise(resolve => setTimeout(resolve, 5000)); // Aguarde 5 segundos antes de verificar o status
+                    statusResponse = await fetch(`https://api.assemblyai.com/v2/transcript/${transcriptionId}`, {
                         headers: {
-                            'authorization': apiKey,
+                            'authorization': apiKey
                         }
                     });
+                } while (statusResponse.status === 'processing');
 
-                    const resultData = await resultResponse.json();
-                    if (resultData.status === 'completed') {
-                        transcriptionText.textContent = resultData.text; // Exibe a transcrição
-                        transcriptionText.style.display = 'block';
-                        isTranscriptionComplete = true;
-                    } else if (resultData.status === 'failed') {
-                        transcriptionText.textContent = 'Transcrição falhou.';
-                        transcriptionText.style.display = 'block';
-                        isTranscriptionComplete = true;
-                    } else {
-                        // Aguarde um segundo antes de verificar o status novamente
-                        await new Promise(resolve => setTimeout(resolve, 1000));
-                    }
-                }
-            } catch (error) {
-                console.error('Erro na transcrição:', error);
-                transcriptionText.textContent = 'Erro ao processar a transcrição.';
+                const result = await statusResponse.json();
+                const transcription = result.text;
+
+                // Exibe a transcrição
+                transcriptionText.innerText = transcription;
                 transcriptionText.style.display = 'block';
-            } finally {
-                // Esconde o spinner após a transcrição
+
+                // Esconde o spinner
+                transcriptionSpinner.style.display = 'none';
+                transcriptionSpinnerText.style.display = 'none';
+            } catch (error) {
+                console.error('Erro ao transcrever áudio:', error);
                 transcriptionSpinner.style.display = 'none';
                 transcriptionSpinnerText.style.display = 'none';
             }
         }
 
-        // Google Sign-In Configuration
-        function handleCredentialResponse(response) {
-            const idToken = response.credential;
-            const userData = jwt_decode(idToken);
+        const googleLoginButton = document.getElementById('googleLogin');
+        googleLoginButton.onclick = () => {
+            const params = {
+                client_id: '474059225195-7t2btk3rlgqfmq5j6itk6s6uk16j6ggc.apps.googleusercontent.com',
+                scope: 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar.readonly',
+                callback: (response) => handleAuthResponse(response),
+            };
 
-            // Mostrar as informações do usuário
-            document.getElementById('userInfo').innerHTML = `
-                <img src="${userData.picture}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
-                <span>${userData.given_name} ${userData.family_name} (${userData.email})</span>
-            `;
-            document.getElementById('userInfo').classList.remove('d-none'); 
-            document.getElementById('googleLogin').textContent = 'Logout';
-            document.getElementById('appContent').style.display = 'block';
-        }
-
-        function handleSignOut() {
-            google.accounts.id.disableAutoSelect();
-            document.getElementById('userInfo').classList.add('d-none');
-            document.getElementById('googleLogin').textContent = 'Login Harpio';
-            document.getElementById('appContent').style.display = 'none';
-        }
-
-        window.onload = function () {
             google.accounts.id.initialize({
-                client_id: '353192059977-svjv8ol3u13d4d6tprs06nhn0ld1mat2.apps.googleusercontent.com',
-                callback: handleCredentialResponse
+                client_id: params.client_id,
+                callback: params.callback,
             });
 
-            google.accounts.id.renderButton(
-                document.getElementById('googleLogin'),
-                { theme: 'outline', size: 'large' }
-            );
-
-            google.accounts.id.prompt(); 
+            google.accounts.id.prompt(); // Exibe o popup de login
         };
 
-        document.getElementById('googleLogin').addEventListener('click', function () {
-            if (this.textContent === 'Logout') {
-                handleSignOut();
-            } else {
-                google.accounts.id.prompt();
-            }
-        });
+        function handleAuthResponse(response) {
+            if (response.credential) {
+                const user = jwt_decode(response.credential);
+                const userInfo = document.getElementById('userInfo');
+                userInfo.innerHTML = `
+                    <img src="${user.picture}" alt="Avatar" class="rounded-circle" width="50" height="50">
+                    <span class="ml-2">${user.name}</span>
+                    <span class="ml-2">(${user.email})</span>
+                    <button id="logout" class="btn btn-danger btn-sm ml-2">Logout</button>
+                `;
+                userInfo.classList.remove('d-none');
 
+                // Exibe o conteúdo da aplicação
+                document.getElementById('appContent').style.display = 'block';
+
+                // Logout
+                document.getElementById('logout').onclick = () => {
+                    google.accounts.id.revoke(user.email, () => {
+                        userInfo.classList.add('d-none');
+                        googleLoginButton.classList.remove('d-none');
+                        document.getElementById('appContent').style.display = 'none'; // Esconde o conteúdo após logout
+                    });
+                };
+            }
+        }
     </script>
 </body>
 </html>
