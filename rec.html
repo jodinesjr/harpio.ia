@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gravação e Google Meet com Compromissos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        .radar {
+            width: 30px;
+            height: 30px;
+            border: 10px solid rgb(255, 0, 89);
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            70% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+
+        .rec-blink {
+            font-weight: bold;
+            color: #d94df9;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .toast {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            min-width: 250px;
+            background-color: #d94df9;
+            color: white;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top-color: #d94df9;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-light p-3">
+        <div id="userInfo" class="d-flex align-items-center">
+            <!-- Avatar e nome aparecerão aqui -->
+        </div>
+        <button id="googleLogin" class="btn btn-primary">Login com Google</button>
+    </header>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Gravador de Entrevista harpio</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Gravação <span id="recIndicator"></span></h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="radarContainer" style="display:none;" class="mt-2 mb-2">
+                            <button class="btn">
+                                <div class="radar">
+                                </div> 
+                            </button>
+                        </div>
+                        <button id="startRecording" class="btn btn-primary">Iniciar Gravação</button>
+                        <button id="stopRecording" class="btn btn-secondary disabled">Parar Gravação</button>
+                        <button id="downloadLink" href="#" class="btn btn-success" style="display: none;" download="gravacao.wav">Download do Áudio</button>
+                        <audio id="audioRecorder" class="mt-3" controls></audio>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Transcrição</h5>
+                    </div>
+                    <div class="card-body" id="transcriptionCard">
+                        <div id="transcriptionSpinner" class="spinner" style="display: none;"></div>
+                        <span id="transcriptionSpinnerText" style="display: none;">A transcrição está sendo processada...</span>
+                        <p id="transcriptionText" style="display: none;"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        O áudio está pronto para ser transcrito!
+    </div>
+
+    <script>
+        let audioChunks = [];
+        let recorder;
+        let recordedAudioBlob;
+
+        const startRecording = document.getElementById('startRecording');
+        const stopRecording = document.getElementById('stopRecording');
+        const audioRecorder = document.getElementById('audioRecorder');
+        const downloadLink = document.getElementById('downloadLink');
+        const radarContainer = document.getElementById('radarContainer');
+        const recIndicator = document.getElementById('recIndicator');
+        const toast = document.getElementById('toast');
+        const transcriptionCard = document.getElementById('transcriptionCard');
+        const transcriptionSpinner = document.getElementById('transcriptionSpinner');
+        const transcriptionSpinnerText = document.getElementById('transcriptionSpinnerText');
+        const transcriptionText = document.getElementById('transcriptionText');
+
+        // Função para exibir o toast
+        function showToast() {
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000); // O toast desaparece após 3 segundos
+        }
+
+        // Captura o áudio da aba do navegador (Google Meet) ou do microfone
+        startRecording.addEventListener('click', async () => {
+            audioChunks = []; // Limpa os chunks para nova gravação
+
+            try {
+                const micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                recorder = new MediaRecorder(micStream);
+                recorder.ondataavailable = (event) => {
+                    audioChunks.push(event.data);
+                };
+
+                recorder.start();
+
+                // Exibe radar e "REC" piscando
+                radarContainer.style.display = 'inline';
+                document.title = 'Gravando...';
+
+                startRecording.disabled = true;
+                stopRecording.disabled = false;
+            } catch (err) {
+                console.error('Erro ao capturar mídia da aba, capturando apenas microfone:', err);
+
+                // Caso a captura da aba falhe, captura apenas o microfone
+                try {
+                    const micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+                    recorder = new MediaRecorder(micStream);
+
+                    recorder.ondataavailable = (event) => {
+                        audioChunks.push(event.data);
+                    };
+
+                    recorder.start();
+
+                    // Exibe radar e "REC" piscando
+                    radarContainer.style.display = 'inline';
+                    document.title = 'Gravando...';
+
+                    startRecording.disabled = true;
+                    stopRecording.disabled = false;
+                } catch (micError) {
+                    console.error('Erro ao capturar áudio do microfone:', micError);
+                }
+            }
+        });
+
+        stopRecording.addEventListener('click', () => {
+            recorder.stop();
+            recorder.onstop = () => {
+                recordedAudioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                audioRecorder.src = URL.createObjectURL(recordedAudioBlob); // Exibe áudio no player
+
+                // Exibe link de download
+                downloadLink.href = URL.createObjectURL(recordedAudioBlob);
+                downloadLink.style.display = 'inline';
+
+                // Esconde radar e "REC"
+                radarContainer.style.display = 'none';
+                document.title = 'Gravação e Google Meet';
+
+                // Exibe mensagem toast
+                showToast();
+
+                // Inicia a transcrição com AssemblyAI
+                transcreverAudio(recordedAudioBlob);
+            };
+
+            startRecording.disabled = false;
+            stopRecording.disabled = true;
+        });
+
+        async function transcreverAudio(audioBlob) {
+            // Exibe o spinner de carregamento da transcrição
+            transcriptionSpinner.style.display = 'inline-block';
+            transcriptionSpinnerText.style.display = 'inline-block';
+
+            const apiKey = "8048696e8c1640ca902f726e2134daab"; // Sua chave da API AssemblyAI
+
+            try {
+                // Primeiro, faça o upload do áudio para AssemblyAI
+                const uploadResponse = await fetch('https://api.assemblyai.com/v2/upload', {
+                    method: 'POST',
+                    headers: {
+                        'authorization': apiKey,
+                    },
+                    body: audioBlob
+                });
+
+                const uploadData = await uploadResponse.json();
+                const audioUrl = uploadData.upload_url; // URL do áudio carregado
+
+                // Agora, inicie o processo de transcrição
+                const transcriptionResponse = await fetch('https://api.assemblyai.com/v2/transcript', {
+                    method: 'POST',
+                    headers: {
+                        'authorization': apiKey,
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        audio_url: audioUrl, // URL do áudio carregado
+                        speech_model: "nano",
+                        language_detection: true,
+                        // speech_model: "best",
+                        // language_code: "pt",
+                        iab_categories: false,
+                        content_safety: false,
+                        sentiment_analysis: false,
+                        redact_pii: false,
+                        speaker_labels: true,
+                        filter_profanity: false,
+                        redact_pii_policies: [
+                            // "medical_condition",
+                            // "email_address",
+                            // "phone_number",
+                            // "banking_information",
+                            // "credit_card_number",
+                            // "credit_card_cvv",
+                            // "date_of_birth",
+                            // "person_name"
+                    ],
+                    })
+                });
+
+                const transcriptionData = await transcriptionResponse.json();
+                const transcriptId = transcriptionData.id;
+
+                // Agora precisamos verificar o status da transcrição até que ela esteja pronta
+                let transcriptReady = false;
+                let transcriptText = '';
+
+                while (!transcriptReady) {
+                    const statusResponse = await fetch(`https://api.assemblyai.com/v2/transcript/${transcriptId}`, {
+                        method: 'GET',
+                        headers: {
+                            'authorization': apiKey
+                        }
+                    });
+
+                    const statusData = await statusResponse.json();
+                    transcriptReady = statusData.status === 'completed';
+
+                    if (statusData.status === 'failed') {
+                        throw new Error('A transcrição falhou');
+                    }
+
+                    if (transcriptReady) {
+                        transcriptText = statusData.text;
+                    } else {
+                        // A API recomenda esperar alguns segundos antes de verificar novamente
+                        await new Promise(resolve => setTimeout(resolve, 3000));
+                    }
+                }
+
+                // Esconde o spinner e mostra a transcrição
+                transcriptionSpinner.style.display = 'none';
+                transcriptionSpinnerText.style.display = 'none';
+                transcriptionText.textContent = transcriptText;
+                transcriptionText.style.display = 'block';
+            } catch (error) {
+                console.error('Erro na transcrição:', error);
+                transcriptionSpinner.style.display = 'none';
+                transcriptionSpinnerText.style.display = 'none';
+                transcriptionText.textContent = 'Erro ao transcrever o áudio.';
+                transcriptionText.style.display = 'block';
+            }
+        }
+    </script>
+    <script>
+        let user = null;
+
+        function handleCredentialResponse(response) {
+            const data = jwt_decode(response.credential);
+            user = {
+                email: data.email,
+                firstName: data.given_name,
+                lastName: data.family_name,
+                picture: data.picture
+            };
+
+            // Exibe as informações do usuário
+            document.getElementById('userInfo').innerHTML = `
+                <img src="${user.picture}" alt="Avatar" class="rounded-circle" width="40" height="40">
+                <span class="ml-2">${user.firstName} ${user.lastName} (${user.email})</span>
+            `;
+
+            // Esconde o botão de login
+            document.getElementById('googleLogin').style.display = 'none';
+
+            // Agora podemos carregar o Google Calendar
+            loadGoogleCalendar();
+        }
+
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: '353192059977-lf4no5ks42afejuqlrr2pq7n0a6bqnhc.apps.googleusercontent.com',
+                callback: handleCredentialResponse
+            });
+
+            google.accounts.id.renderButton(
+                document.getElementById('googleLogin'),
+                { theme: 'outline', size: 'large' }
+            );
+
+            google.accounts.id.prompt(); // Solicita o login se não estiver logado
+        };
+    </script>
+    <script>
+        function loadGoogleCalendar() {
+            const tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: '353192059977-lf4no5ks42afejuqlrr2pq7n0a6bqnhc.apps.googleusercontent.com',
+                scope: 'https://www.googleapis.com/auth/calendar.readonly',
+                callback: handleCalendarResponse
+            });
+    
+            tokenClient.requestAccessToken();
+        }
+    
+        function handleCalendarResponse(tokenResponse) {
+            fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
+                headers: {
+                    'Authorization': `Bearer ${tokenResponse.access_token}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const events = data.items;
+                let eventList = '<h5>Próximos Compromissos:</h5><ul>';
+                events.forEach(event => {
+                    eventList += `<li>${event.summary} - ${new Date(event.start.dateTime).toLocaleString()}</li>`;
+                });
+                eventList += '</ul>';
+    
+                document.getElementById('userInfo').innerHTML += eventList;
+            })
+            .catch(error => {
+                console.error('Erro ao buscar eventos do Google Calendar:', error);
+            });
+        }
+    </script>    
+</body>
+</html>'
