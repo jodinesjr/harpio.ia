@@ -63,6 +63,18 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+         /* Estilos diferentes para os botões */
+         #googleLogin {
+            background-color: #4285F4; /* Cor do botão de login */
+            color: white; /* Texto branco */
+        }
+
+        #logoutButton {
+            background-color: #DB4437; /* Cor do botão de logout */
+            color: white; /* Texto branco */
+            display: none; /* Inicia como oculto */
+        }
     </style>
 </head>
 <body>
@@ -71,6 +83,7 @@
             <!-- Avatar e nome aparecerão aqui quando o usuário estiver logado -->
         </div>
         <button id="googleLogin" class="ml-3 btn">Login Harpio</button>
+        <button id="logoutButton" class="ml-3 btn" onclick="handleSignOut()">Logout</button>
     </header>
     <div class="container mt-5" id="appContent" style="display:none;">
         <h1 class="text-center mb-4">Gravador de Entrevista Harpio</h1>
@@ -84,15 +97,13 @@
                     <div class="card-body">
                         <div id="radarContainer" style="display:none;" class="mt-2 mb-2">
                             <button class="btn">
-                                <div class="radar">
-                                </div> 
+                                <div class="radar"></div>
                             </button>
                         </div>
                         <button id="startRecording" class="btn btn-primary">Iniciar Gravação</button>
                         <button id="stopRecording" class="btn btn-secondary disabled">Parar Gravação</button>
                         <button id="downloadLink" href="#" class="btn btn-success" style="display: none;" download="gravacao.wav">Download do Áudio</button>
                         <audio id="audioRecorder" class="mt-3" controls></audio>
-                        
                     </div>
                 </div>
             </div>
@@ -287,22 +298,23 @@
 
         // Google Sign-In Configuration
         function handleCredentialResponse(response) {
-            const idToken = response.credential;
-            const userData = jwt_decode(idToken);
+            const user = jwt_decode(response.credential);
             document.getElementById('userInfo').innerHTML = `
-                <img src="${userData.picture}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
-                <span>${userData.given_name} ${userData.family_name}</span>
-            `;
-            document.getElementById('userInfo').classList.remove('d-none');
-            document.getElementById('googleLogin').textContent = 'Logout';
+                <img src="${user.picture}" alt="Avatar" class="rounded-circle" width="40" height="40">
+                <span class="ml-2">${user.name}</span>`;
             document.getElementById('appContent').style.display = 'block';
+            document.getElementById('googleLogin').style.display = 'none';
+            document.getElementById('logoutButton').style.display = 'inline-block';
         }
 
         function handleSignOut() {
-            google.accounts.id.disableAutoSelect();
-            document.getElementById('userInfo').classList.add('d-none');
-            document.getElementById('googleLogin').textContent = 'Login Harpio';
-            document.getElementById('appContent').style.display = 'none';
+            const auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(() => {
+                document.getElementById('userInfo').innerHTML = '';
+                document.getElementById('appContent').style.display = 'none';
+                document.getElementById('googleLogin').style.display = 'inline-block';
+                document.getElementById('logoutButton').style.display = 'none';
+            });
         }
 
         window.onload = function () {
@@ -313,7 +325,7 @@
 
             google.accounts.id.renderButton(
                 document.getElementById('googleLogin'),
-                { theme: 'outline', size: 'large' }
+                { theme: '', size: '' }
             );
         };
 
