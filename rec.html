@@ -299,6 +299,8 @@
             document.getElementById('googleLogin').style.display = 'none'; // Esconde o botão de login
         }
 
+        
+
         window.onload = function () {
             google.accounts.id.initialize({
                 client_id: '353192059977-svjv8ol3u13d4d6tprs06nhn0ld1mat2.apps.googleusercontent.com', // Coloque aqui seu Client ID
@@ -312,6 +314,11 @@
 
             google.accounts.id.prompt(); // Solicita login ao usuário
         };
+
+        document.getElementById('googleLogin').addEventListener('click', () => {
+            google.accounts.id.prompt();
+        });
+
     </script>
 </body>
 </html>
