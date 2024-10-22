@@ -334,7 +334,9 @@
             // Redefine o botão de login para sua função original
             google.accounts.id.prompt()
             // Alterar o texto do botão de login
-            document.getElementById('googleLogin').innerText = 'Login Harpio';
+            document.getElementById('googleLogin').addEventListener('click', () => {
+                google.accounts.id.prompt(); // Exibe o popup de login ao clicar
+            });
             if (document.getElementById('userInfo').classList.contains('d-none')) {
                 google.accounts.id.prompt(); // Login
             } else {
