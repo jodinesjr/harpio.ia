@@ -68,7 +68,6 @@
     <header class="bg-light p-3">
         <div id="userInfo" class="d-flex align-items-center">
             <!-- Avatar e nome aparecerão aqui -->
-            <span id="loginStatus" class="ml-2"></span>
         </div>
         <button id="googleLogin" class="btn btn-primary">Login com Google</button>
     </header>
@@ -84,13 +83,15 @@
                     <div class="card-body">
                         <div id="radarContainer" style="display:none;" class="mt-2 mb-2">
                             <button class="btn">
-                                <div class="radar"></div>
+                                <div class="radar">
+                                </div> 
                             </button>
                         </div>
                         <button id="startRecording" class="btn btn-primary">Iniciar Gravação</button>
                         <button id="stopRecording" class="btn btn-secondary disabled">Parar Gravação</button>
                         <button id="downloadLink" href="#" class="btn btn-success" style="display: none;" download="gravacao.wav">Download do Áudio</button>
                         <audio id="audioRecorder" class="mt-3" controls></audio>
+                        
                     </div>
                 </div>
             </div>
@@ -130,7 +131,6 @@
         const transcriptionSpinner = document.getElementById('transcriptionSpinner');
         const transcriptionSpinnerText = document.getElementById('transcriptionSpinnerText');
         const transcriptionText = document.getElementById('transcriptionText');
-        const loginStatus = document.getElementById('loginStatus');
 
         // Função para exibir o toast
         function showToast() {
@@ -238,99 +238,76 @@
                         'authorization': apiKey,
                         'content-type': 'application/json'
                     },
-                    body: JSON.stringify({ audio_url: audioUrl })
+                    body: JSON.stringify({
+                        audio_url: audioUrl, // URL do áudio carregado
+                        speech_model: "nano",
+                        language_detection: true,
+                        // speech_model: "best",
+                        // diarization: true // Habilita a diarização se necessário
+                    })
                 });
 
                 const transcriptionData = await transcriptionResponse.json();
                 const transcriptId = transcriptionData.id;
 
-                // Verifique o status da transcrição
-                const checkTranscription = async (transcriptId) => {
+                // Verifique o status da transcrição até que esteja completa
+                let isTranscriptionComplete = false;
+                while (!isTranscriptionComplete) {
                     const resultResponse = await fetch(`https://api.assemblyai.com/v2/transcript/${transcriptId}`, {
-                        headers: { 'authorization': apiKey }
+                        headers: {
+                            'authorization': apiKey,
+                        }
                     });
 
                     const resultData = await resultResponse.json();
-
                     if (resultData.status === 'completed') {
-                        transcriptionText.textContent = resultData.text; // Mostra a transcrição
-                        transcriptionText.style.display = 'block'; // Exibe o texto transcrito
-                        transcriptionSpinner.style.display = 'none'; // Esconde o spinner
-                        transcriptionSpinnerText.style.display = 'none'; // Esconde o texto do spinner
+                        transcriptionText.textContent = resultData.text; // Exibe a transcrição
+                        transcriptionText.style.display = 'block';
+                        isTranscriptionComplete = true;
                     } else if (resultData.status === 'failed') {
-                        transcriptionText.textContent = 'Erro ao transcrever o áudio.';
-                        transcriptionSpinner.style.display = 'none'; // Esconde o spinner
-                        transcriptionSpinnerText.style.display = 'none'; // Esconde o texto do spinner
+                        transcriptionText.textContent = 'Transcrição falhou.';
+                        transcriptionText.style.display = 'block';
+                        isTranscriptionComplete = true;
                     } else {
-                        setTimeout(() => checkTranscription(transcriptId), 5000); // Verifica novamente a cada 5 segundos
+                        // Aguarde um segundo antes de verificar o status novamente
+                        await new Promise(resolve => setTimeout(resolve, 1000));
                     }
-                };
-
-                checkTranscription(transcriptId); // Inicia a verificação do status da transcrição
+                }
             } catch (error) {
-                console.error('Erro ao transcrever o áudio:', error);
-                transcriptionText.textContent = 'Erro ao transcrever o áudio.';
-                transcriptionSpinner.style.display = 'none'; // Esconde o spinner
-                transcriptionSpinnerText.style.display = 'none'; // Esconde o texto do spinner
+                console.error('Erro na transcrição:', error);
+                transcriptionText.textContent = 'Erro ao processar a transcrição.';
+                transcriptionText.style.display = 'block';
+            } finally {
+                // Esconde o spinner após a transcrição
+                transcriptionSpinner.style.display = 'none';
+                transcriptionSpinnerText.style.display = 'none';
             }
         }
 
-        // Função de Login com Google
-        const onGoogleSignIn = (googleUser) => {
-            const profile = googleUser.getBasicProfile();
-            const avatar = profile.getImageUrl();
-            const name = profile.getName();
-            const email = profile.getEmail();
-
+        // Configuração do Google Login
+        function handleCredentialResponse(response) {
+            const data = jwt_decode(response.credential);
             // Exibe informações do usuário
-            loginStatus.innerHTML = `<img src="${avatar}" alt="Avatar" width="30" height="30" class="rounded-circle me-2">${name} (${email})`;
-            document.getElementById('googleLogin').style.display = 'none'; // Esconde botão de login
-            loadCalendarEvents(); // Carrega compromissos do Google Calendar
+            document.getElementById('userInfo').innerHTML = `
+                <img src="${data.picture}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
+                <span>${data.given_name} ${data.family_name} (${data.email})</span>
+            `;
+            document.getElementById('googleLogin').style.display = 'none'; // Esconde o botão de login
+        }
+
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: 'YOUR_CLIENT_ID', // Coloque aqui seu Client ID
+                callback: handleCredentialResponse
+            });
+
+            google.accounts.id.renderButton(
+                document.getElementById('googleLogin'),
+                { theme: 'outline', size: 'large' } // Personalização do botão
+            );
+
+            google.accounts.id.prompt(); // Solicita login ao usuário
         };
-
-        // Função para carregar eventos do Google Calendar
-        async function loadCalendarEvents() {
-            const token = await getToken(); // Obtenha o token do Google
-
-            fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
-                headers: {
-                    Authorization: 'Bearer ' + token,
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Eventos do Google Calendar:', data.items); // Exibe os eventos no console
-                // Aqui você pode exibir os eventos em uma interface, se desejar
-            })
-            .catch(error => {
-                console.error('Erro ao carregar eventos do Google Calendar:', error);
-            });
-        }
-
-        // Função para obter o token de acesso do Google
-        function getToken() {
-            return new Promise((resolve, reject) => {
-                gapi.load('client:auth2', () => {
-                    gapi.auth2.init({
-                        client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
-                    }).then(() => {
-                        const authInstance = gapi.auth2.getAuthInstance();
-                        if (authInstance.isSignedIn.get()) {
-                            const user = authInstance.currentUser.get();
-                            const token = user.getAuthResponse().access_token;
-                            resolve(token);
-                        } else {
-                            reject('Usuário não está autenticado');
-                        }
-                    });
-                });
-            });
-        }
-
-        // Autentica o usuário ao clicar no botão
-        document.getElementById('googleLogin').addEventListener('click', () => {
-            gapi.auth2.getAuthInstance().signIn().then(onGoogleSignIn);
-        });
     </script>
 </body>
 </html>
