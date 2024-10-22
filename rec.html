@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gravação e Google Meet com Compromissos</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         .radar {
@@ -65,14 +66,14 @@
     </style>
 </head>
 <body>
-    <header class="bg-light p-3">
-        <div id="userInfo" class="d-flex align-items-center">
-            <!-- Avatar e nome aparecerão aqui -->
+    <header class="bg-light p-3 d-flex justify-content-between align-items-center">
+        <div id="userInfo" class="d-none">
+            <!-- Avatar e nome aparecerão aqui quando o usuário estiver logado -->
         </div>
-        <button id="googleLogin" class="btn btn-primary">Login com Google</button>
+        <button id="googleLogin" class="btn btn-primary">Login Harpio</button>
     </header>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Gravador de Entrevista harpio</h1>
+    <div class="container mt-5" id="appContent" style="display:none;">
+        <h1 class="text-center mb-4">Gravador de Entrevista Harpio</h1>
 
         <div class="row">
             <div class="col-md-6">
@@ -137,7 +138,7 @@
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
-            }, 3000); // O toast desaparece após 3 segundos
+            }, 4000);
         }
 
         // Captura o áudio da aba do navegador (Google Meet) ou do microfone
@@ -284,38 +285,48 @@
             }
         }
 
-        // Configuração do Google Login
+        // Google Sign-In Configuration
         function handleCredentialResponse(response) {
-            // Decodifica o ID token
             const idToken = response.credential;
             const userData = jwt_decode(idToken);
 
-            // Exibe informações do usuário
+            // Mostrar as informações do usuário
             document.getElementById('userInfo').innerHTML = `
                 <img src="${userData.picture}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
                 <span>${userData.given_name} ${userData.family_name} (${userData.email})</span>
             `;
-            document.getElementById('userInfo').style.display = 'flex'; // Exibe as informações
-            document.getElementById('googleLogin').style.display = 'none'; // Esconde o botão de login
+            document.getElementById('userInfo').classList.remove('d-none'); 
+            document.getElementById('googleLogin').textContent = 'Logout';
+            document.getElementById('appContent').style.display = 'block';
         }
 
-        
-        window.onload = function() {
+        function handleSignOut() {
+            google.accounts.id.disableAutoSelect();
+            document.getElementById('userInfo').classList.add('d-none');
+            document.getElementById('googleLogin').textContent = 'Login Harpio';
+            document.getElementById('appContent').style.display = 'none';
+        }
+
+        window.onload = function () {
             google.accounts.id.initialize({
-                client_id: "353192059977-svjv8ol3u13d4d6tprs06nhn0ld1mat2.apps.googleusercontent.com",  // Use o Client ID correto
-                callback: handleCredentialResponse,
+                client_id: '353192059977-svjv8ol3u13d4d6tprs06nhn0ld1mat2.apps.googleusercontent.com',
+                callback: handleCredentialResponse
             });
 
             google.accounts.id.renderButton(
-                document.getElementById("googleLogin"),
-                { theme: "outline", size: "large" }
+                document.getElementById('googleLogin'),
+                { theme: 'outline', size: 'large' }
             );
 
-            google.accounts.id.prompt();  // Use o Google One Tap
+            google.accounts.id.prompt(); 
         };
 
-        document.getElementById('googleLogin').addEventListener('click', () => {
-            google.accounts.id.prompt();
+        document.getElementById('googleLogin').addEventListener('click', function () {
+            if (this.textContent === 'Logout') {
+                handleSignOut();
+            } else {
+                google.accounts.id.prompt();
+            }
         });
 
     </script>
