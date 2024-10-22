@@ -66,7 +66,7 @@
 
          /* Estilos diferentes para os botões */
          #googleLogin {
-            background-color: #4285F4; /* Cor do botão de login */
+            background-color: none; /* Cor do botão de login */
             color: white; /* Texto branco */
         }
 
@@ -78,12 +78,28 @@
     </style>
 </head>
 <body>
-    <header class="bg-light p-3 d-flex justify-content-end align-items-end">
-        <div id="userInfo" class="d-inline">
+    <header class="align-content-center d-flex align-items-center justify-content-end  py-3 mb-4 border-bottom">
+        <div class="col-md-3 mb-2 mb-md-0">
+        <a href="/" class="link-body-emphasis ml-5 px-lg-5">
+            <img height="56" aria-label="Bootstrap" src="https://d1eni3461m2dqk.cloudfront.net/wp-content/uploads/2024/01/Extenso-1.png"><img>
+        </a>
+        </div>
+
+        <ul class="nav col-md-6 mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="#" class="nav-link px-2">Features</a></li>
+        <li><a href="#" class="nav-link px-2">Pricing</a></li>
+        <li><a href="#" class="nav-link px-2">FAQs</a></li>
+        <li><a href="#" class="nav-link px-2">About</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end justify-content-end">
+        <div id="userInfo" class="d-inline" style="display: none;">
             <!-- Avatar e nome aparecerão aqui quando o usuário estiver logado -->
         </div>
-        <button id="googleLogin" class="ml-3 btn">Login Harpio</button>
-        <button id="logoutButton" class="ml-3 btn" onclick="handleSignOut()">Logout</button>
+        <button type="button" id="googleLogin" class="btn me-2">Login Harpio</button>
+        <button type="button" id="logoutButton" class="btn ml-3" style="display: none;" onclick="handleSignOut()">Logout</button>
+        </div>
     </header>
     <div class="container mt-5" id="appContent" style="display:none;">
         <h1 class="text-center mb-4">Gravador de Entrevista Harpio</h1>
@@ -302,20 +318,16 @@
             document.getElementById('userInfo').innerHTML = `
                 <img src="${user.picture}" alt="Avatar" class="rounded-circle" width="40" height="40">
                 <span class="ml-2">${user.name}</span>`;
+            document.getElementById('userInfo').style.display = 'block';
             document.getElementById('appContent').style.display = 'block';
             document.getElementById('googleLogin').style.display = 'none';
             document.getElementById('logoutButton').style.display = 'inline-block';
         }
 
         function handleSignOut() {
-            const auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(() => {
-                document.getElementById('userInfo').innerHTML = '';
-                document.getElementById('appContent').style.display = 'none';
-                document.getElementById('googleLogin').style.display = 'inline-block';
-                document.getElementById('logoutButton').style.display = 'none';
-            });
-        }
+            // Atualiza a página
+                window.location.reload();
+            };
 
         window.onload = function () {
             google.accounts.id.initialize({
@@ -329,40 +341,15 @@
             );
         };
 
-        // Evento de logout
+        // Simplificando a lógica de login/logout:
         document.getElementById('googleLogin').addEventListener('click', () => {
-            // Remove as informações do usuário do header
-            document.getElementById('userInfo').innerHTML = ''
-            // Oculta a área de informações do usuário
-            document.getElementById('userInfo').style.display = 'none'
-            // Exibe o botão de login novamente
-            document.getElementById('googleLogin').style.display = 'block'
-            // Limpa o ID do usuário localmente, ou seja, deslogar
-            google.accounts.id.disableAutoSelect()
-            // Redefine o botão de login para sua função original
-            google.accounts.id.prompt()
-            // Alterar o texto do botão de login
-            document.getElementById('googleLogin').addEventListener('click', () => {
-                google.accounts.id.prompt(); // Exibe o popup de login ao clicar
-            });
-            if (document.getElementById('userInfo').classList.contains('d-none')) {
-                google.accounts.id.prompt(); // Login
-            } else {
-                handleSignOut(); {
-                    const auth2 = gapi.auth2.getAuthInstance();
-                    auth2.signOut().then(() => {
-                        // Limpa as informações do usuário
-                        document.getElementById('userInfo').innerHTML = '';
-                        document.getElementById('appContent').style.display = 'none';
-                        document.getElementById('googleLogin').style.display = 'inline-block';
-                        document.getElementById('logoutButton').style.display = 'none';
-
-                        // Atualiza a página
-                        window.location.reload();
-                    });
-                }
-            }
+            google.accounts.id.prompt();
         });
+
+        document.getElementById('logoutButton').addEventListener('click', () => {
+                window.location.reload();
+            });
+
     </script>
 </body>
 </html>
