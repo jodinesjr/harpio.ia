@@ -70,7 +70,7 @@
         <div id="userInfo" class="d-inline">
             <!-- Avatar e nome aparecerão aqui quando o usuário estiver logado -->
         </div>
-        <button id="googleLogin" class="btn btn-primary">Login Harpio</button>
+        <button id="googleLogin" class="ml-3 btn btn-primary">Login Harpio</button>
     </header>
     <div class="container mt-5" id="appContent" style="display:none;">
         <h1 class="text-center mb-4">Gravador de Entrevista Harpio</h1>
@@ -291,7 +291,7 @@
             const userData = jwt_decode(idToken);
             document.getElementById('userInfo').innerHTML = `
                 <img src="${userData.picture}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
-                <span>${userData.given_name} ${userData.family_name} (${userData.email})</span>
+                <span>${userData.given_name} ${userData.family_name} <br> <small>(${userData.email})</small></span>
             `;
             document.getElementById('userInfo').classList.remove('d-none');
             document.getElementById('googleLogin').textContent = 'Logout';
