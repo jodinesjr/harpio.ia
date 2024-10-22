@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gravação e Google Meet com Compromissos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style href="/style.css"></style>
+</head>
+<body>
+    <header class="align-content-center d-flex align-items-center justify-content-end  py-3 mb-4 border-bottom">
+        <div class="col-md-3 mb-2 mb-md-0">
+        <a href="/" class="link-body-emphasis ml-5 px-lg-5">
+            <img height="56" aria-label="Bootstrap" src="https://d1eni3461m2dqk.cloudfront.net/wp-content/uploads/2024/01/Extenso-1.png"><img>
+        </a>
+        </div>
+
+        <ul class="nav col-md-6 mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="#" class="nav-link px-2">Features</a></li>
+        <li><a href="#" class="nav-link px-2">Pricing</a></li>
+        <li><a href="#" class="nav-link px-2">FAQs</a></li>
+        <li><a href="#" class="nav-link px-2">About</a></li>
+        </ul>
+
+        <div class="col-md-3 text-end justify-content-end">
+        <div id="userInfo" class="d-inline" style="display: none;">
+            <!-- Avatar e nome aparecerão aqui quando o usuário estiver logado -->
+        </div>
+        <button type="button" id="googleLogin" class="btn me-2">Login Harpio</button>
+        <button type="button" id="logoutButton" class="btn ml-3" style="display: none;" onclick="handleSignOut()">Logout</button>
+        </div>
+    </header>
+    <div class="container mt-5" id="appContent" style="display:none;">
+        <h1 class="text-center mb-4">Gravador de Entrevista Harpio</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Gravação <span id="recIndicator"></span></h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="radarContainer" style="display:none;" class="mt-2 mb-2">
+                            <button class="btn">
+                                <div class="radar"></div>
+                            </button>
+                        </div>
+                        <button id="startRecording" class="btn btn-primary">Iniciar Gravação</button>
+                        <button id="stopRecording" class="btn btn-secondary disabled">Parar Gravação</button>
+                        <button id="downloadLink" href="#" class="btn btn-success" style="display: none;" download="gravacao.wav">Download do Áudio</button>
+                        <audio id="audioRecorder" class="mt-3" controls></audio>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Transcrição</h5>
+                    </div>
+                    <div class="card-body" id="transcriptionCard">
+                        <div id="transcriptionSpinner" class="spinner" style="display: none;"></div>
+                        <span id="transcriptionSpinnerText" style="display: none;">A transcrição está sendo processada...</span>
+                        <p id="transcriptionText" style="display: none;"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        O áudio está pronto para ser transcrito!
+    </div>
+
+    <script>
+        let audioChunks = [];
+        let recorder;
+        let recordedAudioBlob;
+
+        const startRecording = document.getElementById('startRecording');
+        const stopRecording = document.getElementById('stopRecording');
+        const audioRecorder = document.getElementById('audioRecorder');
+        const downloadLink = document.getElementById('downloadLink');
+        const radarContainer = document.getElementById('radarContainer');
+        const recIndicator = document.getElementById('recIndicator');
+        const toast = document.getElementById('toast');
+        const transcriptionCard = document.getElementById('transcriptionCard');
+        const transcriptionSpinner = document.getElementById('transcriptionSpinner');
+        const transcriptionSpinnerText = document.getElementById('transcriptionSpinnerText');
+        const transcriptionText = document.getElementById('transcriptionText');
+
+        // Função para exibir o toast
+        function showToast() {
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+        </script>
+        <script src="/app/rec/audiocapture.js">
+            // Captura o áudio da aba do navegador (Google Meet) ou do microfone
+        </script>
+
+        <script src="/app/rec/assembly.js">
+            // Transcrição
+        </script>
+        <script>
+
+        // Google Sign-In Configuration
+        function handleCredentialResponse(response) {
+            const user = jwt_decode(response.credential);
+            document.getElementById('userInfo').innerHTML = `
+                <img src="${user.picture}" alt="Avatar" class="rounded-circle" width="40" height="40">
+                <span class="ml-2">${user.name}</span>`;
+            document.getElementById('userInfo').style.display = 'block';
+            document.getElementById('appContent').style.display = 'block';
+            document.getElementById('googleLogin').style.display = 'none';
+            document.getElementById('logoutButton').style.display = 'inline-block';
+        }
+
+        function handleSignOut() {
+            // Atualiza a página
+                window.location.reload();
+            };
+
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: '353192059977-svjv8ol3u13d4d6tprs06nhn0ld1mat2.apps.googleusercontent.com',
+                callback: handleCredentialResponse
+            });
+
+            google.accounts.id.renderButton(
+                document.getElementById('googleLogin'),
+                { theme: '', size: '' }
+            );
+        };
+
+        // Simplificando a lógica de login/logout:
+        document.getElementById('googleLogin').addEventListener('click', () => {
+            google.accounts.id.prompt();
+        });
+
+        document.getElementById('logoutButton').addEventListener('click', () => {
+                window.location.reload();
+            });
+
+    </script>
+</body>
+</html>

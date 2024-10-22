@@ -1,0 +1,67 @@
+.radar {
+    width: 30px;
+    height: 30px;
+    border: 10px solid rgb(255, 0, 89);
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    70% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.7; }
+}
+
+.rec-blink {
+    font-weight: bold;
+    color: #d94df9;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+.toast {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    min-width: 250px;
+    background-color: #d94df9;
+    color: white;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: none;
+}
+
+.toast.show {
+    display: block;
+}
+
+.spinner {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-top-color: #d94df9;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+ /* Estilos diferentes para os botões */
+ #googleLogin {
+    background-color: none; /* Cor do botão de login */
+    color: white; /* Texto branco */
+}
+
+#logoutButton {
+    background-color: #DB4437; /* Cor do botão de logout */
+    color: white; /* Texto branco */
+    display: none; /* Inicia como oculto */
+}
