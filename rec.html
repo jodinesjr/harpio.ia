@@ -348,8 +348,19 @@
             if (document.getElementById('userInfo').classList.contains('d-none')) {
                 google.accounts.id.prompt(); // Login
             } else {
-                handleSignOut(); // Logout
-                window.location.reload(true);
+                handleSignOut(); {
+                    const auth2 = gapi.auth2.getAuthInstance();
+                    auth2.signOut().then(() => {
+                        // Limpa as informações do usuário
+                        document.getElementById('userInfo').innerHTML = '';
+                        document.getElementById('appContent').style.display = 'none';
+                        document.getElementById('googleLogin').style.display = 'inline-block';
+                        document.getElementById('logoutButton').style.display = 'none';
+
+                        // Atualiza a página
+                        window.location.reload();
+                    });
+                }
             }
         });
     </script>
