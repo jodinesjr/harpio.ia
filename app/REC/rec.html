@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <style href="/style.css"></style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="align-content-center d-flex align-items-center justify-content-end  py-3 mb-4 border-bottom">
@@ -100,53 +100,17 @@
             }, 4000);
         }
         </script>
-        <script src="/app/rec/audiocapture.js">
+        <script src="audiocapture.js">
             // Captura o áudio da aba do navegador (Google Meet) ou do microfone
         </script>
 
-        <script src="/app/rec/assembly.js">
+        <script src="assembly.js">
             // Transcrição
         </script>
-        <script>
+        <script src="google.js">
 
         // Google Sign-In Configuration
-        function handleCredentialResponse(response) {
-            const user = jwt_decode(response.credential);
-            document.getElementById('userInfo').innerHTML = `
-                <img src="${user.picture}" alt="Avatar" class="rounded-circle" width="40" height="40">
-                <span class="ml-2">${user.name}</span>`;
-            document.getElementById('userInfo').style.display = 'block';
-            document.getElementById('appContent').style.display = 'block';
-            document.getElementById('googleLogin').style.display = 'none';
-            document.getElementById('logoutButton').style.display = 'inline-block';
-        }
-
-        function handleSignOut() {
-            // Atualiza a página
-                window.location.reload();
-            };
-
-        window.onload = function () {
-            google.accounts.id.initialize({
-                client_id: '353192059977-svjv8ol3u13d4d6tprs06nhn0ld1mat2.apps.googleusercontent.com',
-                callback: handleCredentialResponse
-            });
-
-            google.accounts.id.renderButton(
-                document.getElementById('googleLogin'),
-                { theme: '', size: '' }
-            );
-        };
-
-        // Simplificando a lógica de login/logout:
-        document.getElementById('googleLogin').addEventListener('click', () => {
-            google.accounts.id.prompt();
-        });
-
-        document.getElementById('logoutButton').addEventListener('click', () => {
-                window.location.reload();
-            });
-
+        
     </script>
 </body>
 </html>
