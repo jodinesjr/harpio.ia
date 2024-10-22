@@ -321,14 +321,26 @@
             google.accounts.id.prompt(); // Exibe o popup de login ao clicar
         });
 
-        // Evento de logout
-        document.getElementById('googleLogin').addEventListener('click', () => {
-            if (document.getElementById('userInfo').classList.contains('d-none')) {
-                google.accounts.id.prompt(); // Login
-            } else {
-                handleSignOut(); // Logout
-            }
-        });
+        // Evento para logout
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+            // Remove as informações do usuário do header
+            document.getElementById('userInfo').innerHTML = '';
+
+            // Oculta a área de informações do usuário
+            document.getElementById('userInfo').style.display = 'none';
+
+            // Exibe o botão de login novamente
+            document.getElementById('googleLogin').style.display = 'block';
+
+            // Limpa o ID do usuário localmente, ou seja, deslogar
+            google.accounts.id.disableAutoSelect();
+
+            // Redefine o botão de login para sua função original
+            google.accounts.id.prompt();
+
+            // Alterar o texto do botão de login
+            document.getElementById('googleLogin').innerText = 'Login Harpio';
+            });
     </script>
 </body>
 </html>
