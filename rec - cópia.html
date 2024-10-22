@@ -291,7 +291,7 @@
             const userData = jwt_decode(idToken);
             document.getElementById('userInfo').innerHTML = `
                 <img src="${userData.picture}" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;">
-                <span>${userData.given_name} ${userData.family_name}</span>
+                <span>${userData.given_name} ${userData.family_name} <br> <small>(${userData.email})</small></span>
             `;
             document.getElementById('userInfo').classList.remove('d-none');
             document.getElementById('googleLogin').textContent = 'Logout';
