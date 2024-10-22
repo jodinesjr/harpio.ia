@@ -317,10 +317,6 @@
             );
         };
 
-        document.getElementById('googleLogin').addEventListener('click', () => {
-            google.accounts.id.prompt(); // Exibe o popup de login ao clicar
-        });
-
         // Evento de logout
         document.getElementById('googleLogin').addEventListener('click', () => {
             // Remove as informações do usuário do header
@@ -341,6 +337,7 @@
                 google.accounts.id.prompt(); // Login
             } else {
                 handleSignOut(); // Logout
+                window.location.reload(true);
             }
         });
     </script>
